@@ -1,0 +1,18 @@
+h1 Goals
+
+table
+    thead
+        tr
+            th 目標
+            th 行動
+            th 価値観
+            th ランク
+
+    tbody
+        - @goals.each do |goal|
+            tr
+                td = goal.goal_content
+                td = goal.action_content
+                td = goal.identity_content
+                td = goal.rank
+br
