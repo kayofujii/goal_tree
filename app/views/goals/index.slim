@@ -1,0 +1,24 @@
+h1 Goals
+
+table
+    thead
+        tr
+            th 目標
+            th 行動
+            th 価値観
+            th ランク
+            th
+            th
+
+    tbody
+        - @goals.each do |goal|
+            tr
+                td = goal.goal_content
+                td = goal.action_content
+                td = goal.identity_content
+                td = goal.rank
+                td
+                    = link_to '編集', edit_goal_path(goal), class: 'btn btn-primary mr-3'
+                td
+                    = link_to '削除', goal_path(goal), method: :delete, class: 'btn btn-primary mr-3'
+br
