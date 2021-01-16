@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 2021_01_02_011424) do
   enable_extension "plpgsql"
 
   create_table "goals", force: :cascade do |t|
-    t.text "goal_content"
-    t.text "action_content"
-    t.text "identity_content"
-    t.integer "rank"
+    t.text "goal_content", null: false
+    t.text "action_content", null: false
+    t.text "identity_content", null: false
+    t.integer "rank", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
