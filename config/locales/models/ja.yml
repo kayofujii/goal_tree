@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      goal: 目標
+    attributes:
+      goal:
+        id: ID
+        created_at: 登録日時
+        updated_at: 更新日時
+        goal_content: 目標
+        action_content: 行動
+        identity_content: 価値観
+        rank: ランク
