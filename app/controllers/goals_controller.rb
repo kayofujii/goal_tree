@@ -13,7 +13,7 @@ class GoalsController < ApplicationController
         if @goal.save
             redirect_to action: :index
         else
-            redirect_to action: :new
+            render :new
         end
     end
 
@@ -27,7 +27,7 @@ class GoalsController < ApplicationController
         if @goal.save
             redirect_to action: :index
         else
-            redirect_to action: :edit
+            render :edit
         end
     end
 
