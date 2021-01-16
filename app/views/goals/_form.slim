@@ -1,0 +1,16 @@
+- if @goal.errors.present?
+    ul#error_explanation
+        - @goal.errors.full_messages.each do |message|
+            li = message
+
+= form_with model: @goal, local: true do |f|
+    .form-group
+        = f.label :goal_content
+        = f.text_field :goal_content, class: 'form-control'
+    .form-group
+        = f.label :action_content
+        = f.text_field :action_content, class: 'form-control'
+    .form-group
+        = f.label :identity_content
+        = f.text_field :identity_content, class: 'form-control'
+    = f.submit "submit", class:"btn btn-primary"
