@@ -7,7 +7,7 @@ table
             th 行動
             th 価値観
             th ランク
-            th
+            th email
             th
 
     tbody
@@ -17,9 +17,11 @@ table
                 td = goal.action_content
                 td = goal.identity_content
                 td = goal.rank
+                td = goal.user.email
                 td
                     = link_to '編集', edit_goal_path(goal), class: 'btn btn-primary mr-3'
                 td
                     = link_to '削除', goal_path(goal), method: :delete, class: 'btn btn-primary mr-3'
 br
 = link_to "目標を新規作成", new_goal_path
+= button_to "ログアウト", destroy_user_session_path, method: :delete

@@ -3,4 +3,6 @@ class Goal < ApplicationRecord
     validates :action_content, presence: true
     validates :identity_content, presence: true
     validates :rank, presence: true
+
+    belongs_to :user
 end
