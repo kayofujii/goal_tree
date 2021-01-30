@@ -4,5 +4,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
+
+  validates :name, presence: true
+  validates :description, length: { maximum: 200 }
+
   has_many :goals
 end
