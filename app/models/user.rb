@@ -9,4 +9,6 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 200 }
 
   has_many :goals
+
+  mount_uploader :icon, IconUploader
 end
