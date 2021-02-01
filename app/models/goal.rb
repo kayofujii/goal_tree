@@ -5,4 +5,8 @@ class Goal < ApplicationRecord
     validates :rank, presence: true
 
     belongs_to :user
+
+    has_many :actions, dependent: :destroy
+
+    accepts_nested_attributes_for :actions
 end

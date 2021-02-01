@@ -7,7 +7,7 @@ table
             th 行動
             th 価値観
             th ランク
-            th email
+            th 行動
             th
 
     tbody
@@ -17,7 +17,8 @@ table
                 td = goal.action_content
                 td = goal.identity_content
                 td = goal.rank
-                td = goal.user.email
+                - if goal.actions.present?
+                    td = goal.actions.first.action_name
                 td
                     = link_to '編集', edit_goal_path(goal), class: 'btn btn-primary mr-3'
                 td
