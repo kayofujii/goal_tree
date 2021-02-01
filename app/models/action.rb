@@ -3,4 +3,6 @@ class Action < ApplicationRecord
 
     belongs_to :user, optional: true
     belongs_to :goal, optional: true
+
+    has_many :action_records, dependent: :destroy
 end

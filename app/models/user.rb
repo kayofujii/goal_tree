@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :goals, dependent: :destroy
   has_many :actions, dependent: :destroy
+  has_many :action_records, dependent: :destroy
 
   mount_uploader :icon, IconUploader
 
