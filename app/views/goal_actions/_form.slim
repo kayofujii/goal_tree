@@ -1,10 +1,9 @@
-- if @action.errors.present?
+- if @goal_action.errors.present?
     ul#error_explanation
-        - @action.errors.full_messages.each do |message|
+        - @goal_action.errors.full_messages.each do |message|
             li = message
 h1 新規登録
-= form_for [@goal, @action] do |f|
-    / - binding.pry
+= form_for [@goal, @goal_action] do |f|
     .form-group
         = f.label :action_name
         = f.text_field :action_name, class: 'form-control'

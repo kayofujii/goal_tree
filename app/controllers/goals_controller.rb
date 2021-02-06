@@ -7,7 +7,7 @@ class GoalsController < ApplicationController
 
     def new
         @goal = Goal.new
-        @goal.actions.build
+        @goal.goal_actions.build
     end
 
     def create
@@ -25,7 +25,7 @@ class GoalsController < ApplicationController
 
     def show
         @goal = Goal.find(params[:id])
-        @actions = @goal.actions
+        @goal_actions = @goal.goal_actions
         @action_record = ActionRecord.new
     end
 
@@ -49,7 +49,7 @@ class GoalsController < ApplicationController
     def goal_params
         params.require(:goal).permit(
             :goal_content,:action_content,:identity_content,:rank,
-            actions_attributes: [:action_name, :user_id]
+            goal_actions_attributes: [:action_name, :user_id]
         )
     end
 end

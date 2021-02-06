@@ -6,7 +6,7 @@ class ActionRecordsController < ApplicationController
     def new
         @action_record = ActionRecord.new
         @goals = current_user.goals
-        @actions = current_user.actions
+        @goal_actions = current_user.goal_actions
     end
 
     def create
@@ -17,14 +17,14 @@ class ActionRecordsController < ApplicationController
         if @action_record.save
             redirect_to action: :index
         else
-            render :new
+            render :index
         end
     end
 
     def edit
         @action_record = ActionRecord.find(params[:id])
         @goals = current_user.goals
-        @actions = current_user.actions
+        @goal_actions = current_user.goal_actions
     end
 
     def update
@@ -46,7 +46,7 @@ class ActionRecordsController < ApplicationController
     private
     def action_record_params
         params.require(:action_record).permit(
-            :action_image, :action_comment, :action_id
+            :action_image, :action_comment, :goal_action_id
         )
     end
 end

@@ -1,21 +1,21 @@
-class ActionsController < ApplicationController
+class GoalActionsController < ApplicationController
     def index
         @goal = Goal.find(params[:goal_id])
-        @actions = @goal.actions
-        @action = Action.new
+        @goal_actions = @goal.goal_actions
+        # @goal_actions = GoalAction.new
     end
 
     def new
         @goal = Goal.find(params[:goal_id])
-        @action = Action.new
+        @goal_action = GoalAction.new
     end
 
     def create
-        @action = Action.new(action_params)
-        @action.user_id = current_user.id
-        @action.goal_id = params[:goal_id]
+        @goal_action = GoalAction.new(goal_action_params)
+        @goal_action.user_id = current_user.id
+        @goal_action.goal_id = params[:goal_id]
 
-        if @action.save
+        if @goal_action.save
             redirect_to action: :index
         else
             render :new
@@ -43,9 +43,8 @@ class ActionsController < ApplicationController
     end
 
     private
-    def action_params
-        binding.pry
-        params.require(:action).permit(
+    def goal_action_params
+        params.require(:goal_action).permit(
             :action_name, :goal_id)
         # .merge(goal_id: params[goal.id], user_id: current_user.id)
     end

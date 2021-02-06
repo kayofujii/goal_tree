@@ -1,4 +1,4 @@
-class Action < ApplicationRecord
+class GoalAction < ApplicationRecord
     # validates :action_name, presence: true
 
     belongs_to :user, optional: true

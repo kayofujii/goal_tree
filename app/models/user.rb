@@ -9,10 +9,10 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 200 }
 
   has_many :goals, dependent: :destroy
-  has_many :actions, dependent: :destroy
+  has_many :goal_actions, dependent: :destroy
   has_many :action_records, dependent: :destroy
 
   mount_uploader :icon, IconUploader
 
-  accepts_nested_attributes_for :actions
+  accepts_nested_attributes_for :goal_actions
 end

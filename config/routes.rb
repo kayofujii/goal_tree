@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'goals#index'
   resources :goals, shallow: true do
     resources :action_records
-    resources :actions
+    resources :goal_actions
   end
   resources :users
 end

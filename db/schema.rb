@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_01_013132) do
+ActiveRecord::Schema.define(version: 2021_02_06_064138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,22 +20,22 @@ ActiveRecord::Schema.define(version: 2021_02_01_013132) do
     t.text "action_comment"
     t.bigint "goal_id"
     t.bigint "user_id"
-    t.bigint "action_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["action_id"], name: "index_action_records_on_action_id"
+    t.bigint "goal_action_id"
+    t.index ["goal_action_id"], name: "index_action_records_on_goal_action_id"
     t.index ["goal_id"], name: "index_action_records_on_goal_id"
     t.index ["user_id"], name: "index_action_records_on_user_id"
   end
 
-  create_table "actions", force: :cascade do |t|
+  create_table "goal_actions", force: :cascade do |t|
     t.string "action_name"
     t.bigint "goal_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["goal_id"], name: "index_actions_on_goal_id"
-    t.index ["user_id"], name: "index_actions_on_user_id"
+    t.index ["goal_id"], name: "index_goal_actions_on_goal_id"
+    t.index ["user_id"], name: "index_goal_actions_on_user_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2021_02_01_013132) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "action_records", "actions"
+  add_foreign_key "action_records", "goal_actions"
   add_foreign_key "action_records", "goals"
   add_foreign_key "action_records", "users"
-  add_foreign_key "actions", "goals"
-  add_foreign_key "actions", "users"
+  add_foreign_key "goal_actions", "goals"
+  add_foreign_key "goal_actions", "users"
 end

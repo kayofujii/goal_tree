@@ -14,7 +14,7 @@
         = f.label :identity_content
         = f.text_field :identity_content, class: 'form-control'
     .form-group
-        = f.fields_for :actions do |af|
+        = f.fields_for :goal_actions do |af|
             = af.hidden_field :user_id, value: current_user.id
             = af.label :action_name
             = af.text_field :action_name, class: 'form-control'    

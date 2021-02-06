@@ -1,4 +1,4 @@
-h1 Goal#show
+h1 目標詳細
 table
     thead
         tr
@@ -9,18 +9,20 @@ table
             th
         tbody
             td = @goal.goal_content
-            td = @goal.actions.first.action_name
+            td = @goal.goal_actions.first.action_name
             td = @goal.identity_content
             / td  = link_to '行動編集', goal_actions_path(@goal), class: 'btn btn-light mr-3'
             / td  = link_to '行動記録一覧へ', new_action_record_path, class: 'btn btn-light mr-3'
+br
+h3 行動記録の追加
 = form_for [@goal, @action_record] do |f|
     .form-group
-        = f.label :action
-        = f.collection_select(:action_id, @actions, :id, :action_name)
+        = f.label :行動の種類
+        = f.collection_select(:goal_action_id, @goal_actions, :id, :action_name)
     .form-group
-        = f.label :action_image
+        = f.label :画像
         = f.file_field :action_image
     .form-group
-        = f.label :action_comment
+        = f.label :コメント
         = f.text_field :action_comment, class: 'form-control'
     = f.submit "登録", class:"btn btn-primary"

@@ -5,8 +5,8 @@
 
 = form_for [@goal, @action_record] do |f|
     .form-group
-        = f.label :action
-        = f.collection_select(:action_id, @actions, :id, :action_name)
+        = f.label :goal_action
+        = f.collection_select(:goal_action_id, @goal_actions, :id, :action_name)
     .form-group
         = f.label :action_image
         = f.file_field :action_image

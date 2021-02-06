@@ -6,8 +6,8 @@ class Goal < ApplicationRecord
 
     belongs_to :user
 
-    has_many :actions, dependent: :destroy
+    has_many :goal_actions, dependent: :destroy
     has_many :action_records, dependent: :destroy
 
-    accepts_nested_attributes_for :actions
+    accepts_nested_attributes_for :goal_actions
 end
