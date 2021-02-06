@@ -7,7 +7,8 @@ table
             th 行動
             th 価値観
             th ランク
-            th 行動
+            th 
+            th
             th
 
     tbody
@@ -17,8 +18,9 @@ table
                 td = goal.action_content
                 td = goal.identity_content
                 td = goal.rank
-                - if goal.actions.present?
-                    td = goal.actions.first.action_name
+                / - if goal.actions.present?
+                /     td = goal.actions.first.action_name
+                td  = link_to '詳細', goal_path(goal), class: 'btn btn-light mr-3'
                 td
                     = link_to '編集', edit_goal_path(goal), class: 'btn btn-primary mr-3'
                 td

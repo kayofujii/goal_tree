@@ -1,0 +1,11 @@
+- if @action.errors.present?
+    ul#error_explanation
+        - @action.errors.full_messages.each do |message|
+            li = message
+h1 新規登録
+= form_for [@goal, @action] do |f|
+    / - binding.pry
+    .form-group
+        = f.label :action_name
+        = f.text_field :action_name, class: 'form-control'
+    = f.submit "submit", class:"btn btn-primary"

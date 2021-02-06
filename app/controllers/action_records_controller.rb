@@ -10,7 +10,9 @@ class ActionRecordsController < ApplicationController
     end
 
     def create
-        @action_record = current_user.action_records.create(action_record_params)
+        @action_record = ActionRecord.new(action_record_params)
+        @action_record.user_id = current_user.id
+        @action_record.goal_id = params[:goal_id]
 
         if @action_record.save
             redirect_to action: :index
@@ -44,7 +46,7 @@ class ActionRecordsController < ApplicationController
     private
     def action_record_params
         params.require(:action_record).permit(
-            :action_image, :action_comment, :goal_id, :action_id
+            :action_image, :action_comment, :action_id
         )
     end
 end

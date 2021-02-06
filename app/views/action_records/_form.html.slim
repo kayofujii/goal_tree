@@ -3,17 +3,14 @@
         - @action_record.errors.full_messages.each do |message|
             li = message
 
-= form_with model: @action_record, local: true do |f|
-    .form-group
-        = f.label :goal
-        = f.collection_select(:goal_id, @goals, :id, :goal_content)
+= form_for [@goal, @action_record] do |f|
     .form-group
         = f.label :action
         = f.collection_select(:action_id, @actions, :id, :action_name)
     .form-group
+        = f.label :action_image
+        = f.file_field :action_image
+    .form-group
         = f.label :action_comment
         = f.text_field :action_comment, class: 'form-control'
-    .form-group
-        / = f.label :action_comment
-        / = f.text_field :action_comment, class: 'form-control'
-    = f.submit "submit", class:"btn btn-primary"
+    = f.submit "登録", class:"btn btn-primary"

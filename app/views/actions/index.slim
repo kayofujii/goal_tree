@@ -1,0 +1,19 @@
+h1 Goals
+
+table
+    thead
+        tr
+            th 行動
+            th 
+            th
+
+tbody
+    - @actions.each do |action|
+        tr
+            td = action.action_name
+            td
+                = link_to '編集', edit_action_path(action), class: 'btn btn-primary mr-3'
+            td
+                = link_to '削除', action_path(action), method: :delete, class: 'btn btn-primary mr-3'
+br 
+= render partial: 'form'

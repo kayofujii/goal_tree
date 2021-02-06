@@ -14,7 +14,7 @@ table
     tbody
         - @action_records.each do |action_record|
             tr
-                td = action_record.action_image
+                td = image_tag action_record.action_image_url, width: '50px' if action_record.action_image.present?
                 td = action_record.action_comment
                 td = action_record.goal_id
                 td = action_record.user_id

@@ -23,6 +23,12 @@ class GoalsController < ApplicationController
         @goal = Goal.find(params[:id])
     end
 
+    def show
+        @goal = Goal.find(params[:id])
+        @actions = @goal.actions
+        @action_record = ActionRecord.new
+    end
+
     def update
         @goal = Goal.find(params[:id])
         @goal.assign_attributes goal_params
