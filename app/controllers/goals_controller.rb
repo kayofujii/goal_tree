@@ -7,11 +7,11 @@ class GoalsController < ApplicationController
 
     def new
         @goal = Goal.new
+        @goal.goal_actions.build
     end
 
     def create
-        @goal = current_user.goals.new(goal_params)
-
+        @goal = current_user.goals.create(goal_params)
         if @goal.save
             redirect_to action: :index
         else
@@ -21,6 +21,12 @@ class GoalsController < ApplicationController
 
     def edit
         @goal = Goal.find(params[:id])
+    end
+
+    def show
+        @goal = Goal.find(params[:id])
+        @goal_actions = @goal.goal_actions
+        @action_record = ActionRecord.new
     end
 
     def update
@@ -41,6 +47,9 @@ class GoalsController < ApplicationController
 
     private
     def goal_params
-        params.require(:goal).permit(:goal_content,:action_content,:identity_content,:rank)
+        params.require(:goal).permit(
+            :goal_content,:identity_content,:rank,
+            goal_actions_attributes: [:action_name, :user_id]
+        )
     end
 end

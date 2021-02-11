@@ -4,5 +4,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
-  has_many :goals
+
+  validates :name, presence: true
+  validates :description, length: { maximum: 200 }
+
+  has_many :goals, dependent: :destroy
+  has_many :goal_actions, dependent: :destroy
+  has_many :action_records, dependent: :destroy
+
+  mount_uploader :icon, IconUploader
+
+  accepts_nested_attributes_for :goal_actions
 end

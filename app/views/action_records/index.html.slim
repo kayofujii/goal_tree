@@ -1,0 +1,24 @@
+
+h1 Action_records
+
+table
+    thead
+        tr
+            th 画像
+            th コメント
+            th goal_id
+            th user_id
+            th 
+            th
+
+    tbody
+        - @action_records.each do |action_record|
+            tr
+                td = image_tag action_record.action_image_url, width: '50px' if action_record.action_image.present?
+                td = action_record.action_comment
+                td = action_record.goal_id
+                td = action_record.user_id
+                td
+                    = link_to '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3'
+                td
+                    = link_to '削除', action_record_path(action_record), method: :delete, class: 'btn btn-primary mr-3'

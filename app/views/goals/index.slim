@@ -7,21 +7,24 @@ table
             th 行動
             th 価値観
             th ランク
-            th email
+            th 
+            th
             th
 
     tbody
         - @goals.each do |goal|
             tr
                 td = goal.goal_content
-                td = goal.action_content
+                - if goal.goal_actions.present?
+                    td = goal.goal_actions.first.action_name
                 td = goal.identity_content
                 td = goal.rank
-                td = goal.user.email
+                td  = link_to '詳細', goal_path(goal), class: 'btn btn-light mr-3'
                 td
                     = link_to '編集', edit_goal_path(goal), class: 'btn btn-primary mr-3'
                 td
                     = link_to '削除', goal_path(goal), method: :delete, class: 'btn btn-primary mr-3'
 br
 = link_to "目標を新規作成", new_goal_path
-= button_to "ログアウト", destroy_user_session_path, method: :delete
+= button_to "マイページ", user_path(id: current_user.id), { method: :get, class: "btn btn-primary mr-3" }
+= button_to "ログアウト", destroy_user_session_path, { method: :delete, class: "btn btn-primary mr-3" }
