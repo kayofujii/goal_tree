@@ -15,11 +15,10 @@ table
         - @goals.each do |goal|
             tr
                 td = goal.goal_content
-                td = goal.action_content
+                - if goal.goal_actions.present?
+                    td = goal.goal_actions.first.action_name
                 td = goal.identity_content
                 td = goal.rank
-                / - if goal.actions.present?
-                /     td = goal.actions.first.action_name
                 td  = link_to '詳細', goal_path(goal), class: 'btn btn-light mr-3'
                 td
                     = link_to '編集', edit_goal_path(goal), class: 'btn btn-primary mr-3'

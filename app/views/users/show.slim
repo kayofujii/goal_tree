@@ -26,7 +26,7 @@ table
         - @user.goals.each do |ug|
             tr
                 td = ug.goal_content
-                td = ug.action_content
+                td = ug.goal_actions.first.action_name
                 td = ug.identity_content
                 td = ug.rank
                 td = ug.user.email
