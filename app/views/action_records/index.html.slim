@@ -1,13 +1,11 @@
 
-h1 Action_records
+h1 目標名:#{@goal.goal_content}
 
 table
     thead
         tr
             th 画像
             th コメント
-            th goal_id
-            th user_id
             th 
             th
 
@@ -16,9 +14,9 @@ table
             tr
                 td = image_tag action_record.action_image_url, width: '50px' if action_record.action_image.present?
                 td = action_record.action_comment
-                td = action_record.goal_id
-                td = action_record.user_id
                 td
                     = link_to '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3'
                 td
                     = link_to '削除', action_record_path(action_record), method: :delete, class: 'btn btn-primary mr-3'
+= link_to '行動を追加', new_goal_goal_action_path, class: 'btn btn-light mr-3'
+= link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'

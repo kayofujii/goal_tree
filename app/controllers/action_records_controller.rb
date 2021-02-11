@@ -1,6 +1,7 @@
 class ActionRecordsController < ApplicationController
     def index
-        @action_records = ActionRecord.all
+        @goal = Goal.find(params[:goal_id])
+        @action_records = @goal.action_records.all
     end
 
     def new
@@ -23,24 +24,26 @@ class ActionRecordsController < ApplicationController
 
     def edit
         @action_record = ActionRecord.find(params[:id])
-        @goals = current_user.goals
+        @goals = @action_record.goal
         @goal_actions = current_user.goal_actions
     end
 
     def update
         @action_record = ActionRecord.find(params[:id])
+        @goal = @action_record.goal
         @action_record.assign_attributes action_record_params
         if @action_record.save
-            redirect_to action: :index
+            redirect_to goal_action_records_path(@goal)
         else
-            render :edit
+            redirect_back(fallback_location: root_path)
         end
     end
 
     def destroy
         @action_record = ActionRecord.find(params[:id])
+        @goal = @action_record.goal
         @action_record.destroy
-        redirect_to action_records_url, notice: "削除しました"
+        redirect_to goal_action_records_path(@goal), notice: "削除しました"
     end
 
     private

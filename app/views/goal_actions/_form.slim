@@ -2,7 +2,7 @@
     ul#error_explanation
         - @goal_action.errors.full_messages.each do |message|
             li = message
-h1 新規登録
+
 = form_for [@goal, @goal_action] do |f|
     .form-group
         = f.label :action_name
