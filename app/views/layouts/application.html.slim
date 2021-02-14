@@ -12,4 +12,6 @@ html
     .app-title.navbar.navbar-expand-md.navbar-light.bg-light
       .navbar-btand Goal
     .container
+      - flash.each do |key, value|
+        = content_tag :div, value, class: "alert alert-#{key}"
       = yield
