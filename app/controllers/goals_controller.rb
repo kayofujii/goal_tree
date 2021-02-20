@@ -7,6 +7,7 @@ class GoalsController < ApplicationController
 
     def new
         @goal = Goal.new
+        @goal_categories = GoalCategory.all
         @goal.goal_actions.build
     end
 
@@ -48,7 +49,7 @@ class GoalsController < ApplicationController
     private
     def goal_params
         params.require(:goal).permit(
-            :goal_content,:identity_content,:rank,
+            :goal_content,:identity_content,:rank,:goal_category_id,
             goal_actions_attributes: [:action_name, :user_id]
         )
     end

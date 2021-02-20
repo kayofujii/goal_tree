@@ -5,12 +5,13 @@ table
             th 目標
             th 行動
             th 価値観
-            th
+            th カテゴリ
             th
         tbody
             td = @goal.goal_content
             td = @goal.goal_actions.first.action_name
             td = @goal.identity_content
+            td = @goal.goal_category.name
             td
                 = link_to '編集', edit_goal_path(@goal), class: 'btn btn-primary mr-3'
             td

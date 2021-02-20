@@ -4,6 +4,7 @@ class Goal < ApplicationRecord
     validates :rank, presence: true
 
     belongs_to :user
+    belongs_to :goal_category
 
     has_many :goal_actions, dependent: :destroy
     has_many :action_records, dependent: :destroy
