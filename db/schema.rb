@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_030846) do
+ActiveRecord::Schema.define(version: 2021_02_14_034119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(version: 2021_02_11_030846) do
     t.index ["user_id"], name: "index_goal_actions_on_user_id"
   end
 
+  create_table "goal_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "goals", force: :cascade do |t|
     t.text "goal_content", null: false
     t.text "identity_content", null: false
@@ -45,6 +51,8 @@ ActiveRecord::Schema.define(version: 2021_02_11_030846) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
+    t.bigint "goal_category_id"
+    t.index ["goal_category_id"], name: "index_goals_on_goal_category_id"
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 

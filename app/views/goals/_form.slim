@@ -10,10 +10,12 @@
     .form-group
         = f.fields_for :goal_actions do |af|
             = af.hidden_field :user_id, value: current_user.id
-            = af.label :action_name
+            = af.label :行動
             = af.text_field :action_name, class: 'form-control'
     .form-group
         = f.label :identity_content
         = f.text_field :identity_content, class: 'form-control'
-    
+    .form-group
+        = f.label :行動の種類
+        = f.collection_select(:goal_category_id, @goal_categories, :id, :name)
     = f.submit "submit", class:"btn btn-primary"
