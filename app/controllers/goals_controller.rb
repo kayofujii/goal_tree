@@ -2,7 +2,15 @@ class GoalsController < ApplicationController
     before_action :authenticate_user!
     
     def index
-        @goals = Goal.all
+        @goal_categories = GoalCategory.all
+        if params[:search].present?
+            @goals = Goal.where('goal_content LIKE ?', "%#{params[:search]}%")
+        elsif params[:goal_category_id].present?
+            @goal_category = GoalCategory.find(params[:goal_category_id])
+            @goals = @goal_category.goals.order(created_at: :desc).all
+        else
+            @goals = Goal.all
+        end
     end
 
     def new
@@ -22,6 +30,7 @@ class GoalsController < ApplicationController
 
     def edit
         @goal = Goal.find(params[:id])
+        @goal_categories = GoalCategory.all
     end
 
     def show
@@ -44,6 +53,10 @@ class GoalsController < ApplicationController
         @goal = Goal.find(params[:id])
         @goal.destroy
         redirect_to goals_url, notice: "目標を削除しました"
+    end
+
+    def user
+        @goals = Goal.where(user_id: current_user.id)
     end
 
     private

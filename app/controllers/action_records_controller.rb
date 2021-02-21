@@ -8,8 +8,8 @@ class ActionRecordsController < ApplicationController
 
     def new
         @action_record = ActionRecord.new
-        @goals = current_user.goals
-        @goal_actions = current_user.goal_actions
+        @goal = Goal.find(params[:goal_id])
+        @goal_actions = @goal.goal_actions
     end
 
     def create
