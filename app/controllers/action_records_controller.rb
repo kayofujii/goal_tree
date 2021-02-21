@@ -18,10 +18,10 @@ class ActionRecordsController < ApplicationController
         @action_record.goal_id = params[:goal_id]
         @goal = Goal.find(params[:goal_id])
         if @action_record.save
-            redirect_to goal_path(@goal),
+            redirect_to root_path,
             success: "保存しました"
         else
-            render :index
+            render :new
         end
         update_goal_rank
     end
@@ -36,7 +36,7 @@ class ActionRecordsController < ApplicationController
         @action_record = ActionRecord.find(params[:id])
         @goal = @action_record.goal
         @action_record.assign_attributes action_record_params
-        if @action_record.save
+        if @action_record.save && @action_record.user_id == current_user.id
             redirect_to goal_action_records_path(@goal), 
             success: "保存しました"
         else
@@ -48,9 +48,11 @@ class ActionRecordsController < ApplicationController
     def destroy
         @action_record = ActionRecord.find(params[:id])
         @goal = @action_record.goal
-        @action_record.destroy
-        update_goal_rank
-        redirect_to goal_action_records_path(@goal), success: "削除しました"
+        if @action_record.user_id == current_user.id
+            @action_record.destroy
+            update_goal_rank
+            redirect_to goal_action_records_path(@goal), success: "削除しました"
+        end
     end
 
     def update_goal_rank

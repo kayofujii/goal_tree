@@ -30,7 +30,7 @@ class GoalActionsController < ApplicationController
         @goal_action = GoalAction.find(params[:id])
         @goal = @goal_action.goal
         @goal_action.assign_attributes goal_action_params
-        if @goal_action.save
+        if @goal_action.save && @goal_action.user_id == current_user.id
             redirect_to goal_goal_actions_path(@goal)
         else
             redirect_back(fallback_location: root_path)
@@ -40,8 +40,10 @@ class GoalActionsController < ApplicationController
     def destroy
         @goal_action = GoalAction.find(params[:id])
         @goal = @goal_action.goal
-        @goal_action.destroy
-        redirect_to goal_goal_actions_path(@goal), notice: "目標を削除しました"
+        if @goal_action.user_id == current_user.id
+            @goal_action.destroy
+            redirect_to goal_goal_actions_path(@goal), notice: "目標を削除しました"
+        end
     end
 
     private
