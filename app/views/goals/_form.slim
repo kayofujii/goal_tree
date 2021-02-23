@@ -16,6 +16,6 @@
         = f.label :identity_content
         = f.text_field :identity_content, class: 'form-control'
     .form-group
-        = f.label :行動の種類
+        = f.label :カテゴリー
         = f.collection_select(:goal_category_id, @goal_categories, :id, :name)
     = f.submit "submit", class:"btn btn-primary"

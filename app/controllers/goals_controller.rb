@@ -1,5 +1,6 @@
 class GoalsController < ApplicationController
     before_action :authenticate_user!
+    before_action :correct_user, only: [:edit, :update]
     
     def index
         @goal_categories = GoalCategory.all
@@ -67,5 +68,10 @@ class GoalsController < ApplicationController
             :goal_content,:identity_content,:rank,:goal_category_id,
             goal_actions_attributes: [:action_name, :user_id]
         )
+    end
+
+    def correct_user
+        @user = Goal.find(params[:id]).user
+        redirect_to(root_path) unless current_user?(@user)
     end
 end

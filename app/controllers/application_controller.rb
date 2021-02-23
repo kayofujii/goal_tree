@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    include ApplicationHelper
     add_flash_types :success, :info, :warning, :danger
     protect_from_forgery with: :exception
     before_action :authenticate_user!

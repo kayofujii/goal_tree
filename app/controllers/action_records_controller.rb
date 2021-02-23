@@ -1,5 +1,5 @@
 class ActionRecordsController < ApplicationController
-    # after_action :update_goal_rank, only: %i[create update destroy]
+    before_action :correct_user, only: [:edit, :update]
 
     def index
         @goal = Goal.find(params[:goal_id])
@@ -10,6 +10,8 @@ class ActionRecordsController < ApplicationController
         @action_record = ActionRecord.new
         @goal = Goal.find(params[:goal_id])
         @goal_actions = @goal.goal_actions
+        @user = @goal.user
+        redirect_to(root_path) unless current_user?(@user)
     end
 
     def create
@@ -92,5 +94,10 @@ class ActionRecordsController < ApplicationController
         params.require(:action_record).permit(
             :action_image, :action_comment, :goal_action_id
         )
+    end
+
+    def correct_user
+        @user = ActionRecord.find(params[:id]).user
+        redirect_to(root_path) unless current_user?(@user)
     end
 end
