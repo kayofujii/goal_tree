@@ -10,4 +10,9 @@ class Goal < ApplicationRecord
     has_many :action_records, dependent: :destroy
 
     accepts_nested_attributes_for :goal_actions
+
+    # def self.search(search)
+    #     return Goal.all unless search
+    #     Goal.where(['goal_content LIKE ?', "%#{search}%"])
+    # end
 end

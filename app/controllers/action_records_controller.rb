@@ -1,5 +1,5 @@
 class ActionRecordsController < ApplicationController
-    # after_action :update_goal_rank, only: %i[create update destroy]
+    before_action :correct_user, only: [:edit, :update]
 
     def index
         @goal = Goal.find(params[:goal_id])
@@ -8,8 +8,10 @@ class ActionRecordsController < ApplicationController
 
     def new
         @action_record = ActionRecord.new
-        @goals = current_user.goals
-        @goal_actions = current_user.goal_actions
+        @goal = Goal.find(params[:goal_id])
+        @goal_actions = @goal.goal_actions
+        @user = @goal.user
+        redirect_to(root_path) unless current_user?(@user)
     end
 
     def create
@@ -18,10 +20,10 @@ class ActionRecordsController < ApplicationController
         @action_record.goal_id = params[:goal_id]
         @goal = Goal.find(params[:goal_id])
         if @action_record.save
-            redirect_to goal_path(@goal),
+            redirect_to root_path,
             success: "保存しました"
         else
-            render :index
+            render :new
         end
         update_goal_rank
     end
@@ -36,7 +38,7 @@ class ActionRecordsController < ApplicationController
         @action_record = ActionRecord.find(params[:id])
         @goal = @action_record.goal
         @action_record.assign_attributes action_record_params
-        if @action_record.save
+        if @action_record.save && @action_record.user_id == current_user.id
             redirect_to goal_action_records_path(@goal), 
             success: "保存しました"
         else
@@ -48,9 +50,11 @@ class ActionRecordsController < ApplicationController
     def destroy
         @action_record = ActionRecord.find(params[:id])
         @goal = @action_record.goal
-        @action_record.destroy
-        update_goal_rank
-        redirect_to goal_action_records_path(@goal), success: "削除しました"
+        if @action_record.user_id == current_user.id
+            @action_record.destroy
+            update_goal_rank
+            redirect_to goal_action_records_path(@goal), success: "削除しました"
+        end
     end
 
     def update_goal_rank
@@ -90,5 +94,10 @@ class ActionRecordsController < ApplicationController
         params.require(:action_record).permit(
             :action_image, :action_comment, :goal_action_id
         )
+    end
+
+    def correct_user
+        @user = ActionRecord.find(params[:id]).user
+        redirect_to(root_path) unless current_user?(@user)
     end
 end

@@ -14,8 +14,9 @@ table
             tr
                 td = image_tag action_record.action_image_url, width: '50px' if action_record.action_image.present?
                 td = action_record.action_comment
-                td
-                    = link_to '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3'
-                td
-                    = link_to '削除', action_record_path(action_record), method: :delete, class: 'btn btn-primary mr-3'
+                - if @goal.user_id == current_user.id
+                    td
+                        = link_to_if action_record.user_id == current_user.id,'編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3'
+                    td
+                        = link_to_if action_record.user_id == current_user.id,'削除', method: :delete, class: 'btn btn-primary mr-3'
 = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'

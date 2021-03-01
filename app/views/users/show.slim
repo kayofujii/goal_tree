@@ -34,8 +34,3 @@ table
                     = link_to '編集', edit_goal_path(ug), class: 'btn btn-primary mr-3'
                 td
                     = link_to '削除', goal_path(ug), method: :delete, class: 'btn btn-primary mr-3'
-br
-= link_to "目標を新規作成", new_goal_path
-br
-= link_to "プロフィールを編集", edit_user_registration_path
-= button_to "ログアウト", destroy_user_session_path, method: :delete

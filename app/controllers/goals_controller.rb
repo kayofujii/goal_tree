@@ -1,13 +1,21 @@
 class GoalsController < ApplicationController
     before_action :authenticate_user!
+    before_action :correct_user, only: [:edit, :update]
     
     def index
-        @goals = Goal.all
+        @goal_categories = GoalCategory.all
+        if params[:search].present?
+            @goals = Goal.where('goal_content LIKE ?', "%#{params[:search]}%")
+        elsif params[:goal_category_id].present?
+            @goal_category = GoalCategory.find(params[:goal_category_id])
+            @goals = @goal_category.goals.order(created_at: :desc).all
+        else
+            @goals = Goal.all
+        end
     end
 
     def new
         @goal = Goal.new
-        @goal_categories = GoalCategory.all
         @goal.goal_actions.build
     end
 
@@ -22,6 +30,7 @@ class GoalsController < ApplicationController
 
     def edit
         @goal = Goal.find(params[:id])
+        @goal_categories = GoalCategory.all
     end
 
     def show
@@ -33,7 +42,7 @@ class GoalsController < ApplicationController
     def update
         @goal = Goal.find(params[:id])
         @goal.assign_attributes goal_params
-        if @goal.save
+        if @goal.save && @goal.user_id == current_user.id
             redirect_to action: :index
         else
             render :edit
@@ -42,8 +51,14 @@ class GoalsController < ApplicationController
 
     def destroy
         @goal = Goal.find(params[:id])
-        @goal.destroy
-        redirect_to goals_url, notice: "目標を削除しました"
+        if @goal.user_id == current_user.id
+            @goal.destroy
+            redirect_to goals_url, notice: "目標を削除しました"
+        end
+    end
+
+    def user
+        @goals = Goal.where(user_id: current_user.id)
     end
 
     private
@@ -52,5 +67,10 @@ class GoalsController < ApplicationController
             :goal_content,:identity_content,:rank,:goal_category_id,
             goal_actions_attributes: [:action_name, :user_id]
         )
+    end
+
+    def correct_user
+        @user = Goal.find(params[:id]).user
+        redirect_to(root_path) unless current_user?(@user)
     end
 end

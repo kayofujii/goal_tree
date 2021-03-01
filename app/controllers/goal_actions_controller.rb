@@ -1,4 +1,6 @@
 class GoalActionsController < ApplicationController
+    before_action :correct_user, only: [:edit, :update]
+
     def index
         @goal = Goal.find(params[:goal_id])
         @goal_actions = @goal.goal_actions
@@ -7,6 +9,8 @@ class GoalActionsController < ApplicationController
     def new
         @goal = Goal.find(params[:goal_id])
         @goal_action = GoalAction.new
+        @user = @goal.user
+        redirect_to(root_path) unless current_user?(@user)
     end
 
     def create
@@ -31,7 +35,7 @@ class GoalActionsController < ApplicationController
         @goal = @goal_action.goal
         @goal_action.assign_attributes goal_action_params
         if @goal_action.save
-            redirect_to goal_goal_actions_path(@goal)
+            redirect_back(fallback_location: root_path)
         else
             redirect_back(fallback_location: root_path)
         end
@@ -40,13 +44,20 @@ class GoalActionsController < ApplicationController
     def destroy
         @goal_action = GoalAction.find(params[:id])
         @goal = @goal_action.goal
-        @goal_action.destroy
-        redirect_to goal_goal_actions_path(@goal), notice: "目標を削除しました"
+        if @goal_action.user_id == current_user.id
+            @goal_action.destroy
+            redirect_to goal_goal_actions_path(@goal), notice: "目標を削除しました"
+        end
     end
 
     private
     def goal_action_params
         params.require(:goal_action).permit(
             :action_name, :goal_id)
+    end
+
+    def correct_user
+        @user = GoalAction.find(params[:id]).user
+        redirect_to(root_path) unless current_user?(@user)
     end
 end

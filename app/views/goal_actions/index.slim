@@ -11,8 +11,9 @@ table
         - @goal_actions.each do |goal_action|
             tr
                 td = goal_action.action_name
-                td = link_to '編集', edit_goal_action_path(goal_action), class: 'btn btn-primary mr-3'
-                td = link_to '削除', goal_action_path(goal_action), method: :delete, class: 'btn btn-primary mr-3'
+                - if @goal.user_id == current_user.id
+                    td = link_to_if goal_action.user_id == current_user.id,'編集', edit_goal_action_path(goal_action), class: 'btn btn-primary mr-3'
+                    td = link_to_if @goal.user_id == current_user.id,'削除', goal_action_path(goal_action), method: :delete, remote: true, class: 'btn btn-primary mr-3'
 br 
 = link_to '行動を追加', new_goal_goal_action_path, class: 'btn btn-light mr-3'
 = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'
