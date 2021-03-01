@@ -1,13 +1,17 @@
-h2 目標一覧
-h5 カテゴリ
-- @goal_categories.each do |gc|
-    = link_to "#{gc.name}", goals_path(goal_category_id:gc.id), class: 'btn btn-link mr-3'
-h5 検索
-= form_tag(goals_path,:method => 'get') do 
-    = text_field_tag :search
-    = submit_tag 'Search', :name => nil
-hr
+.container
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            ul.navbar-nav
+                li.nav-item.dropdown
+                    a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+                        i.fa.fa-folder-open カテゴリ
+                    .dropdown-menu aria-labelledby="navbarDropdown"
+                        = link_to "すべて", goals_path, class: 'dropdown-item'
+                        - @goal_categories.each do |gc|
+                            = link_to "#{gc.name}", goals_path(goal_category_id:gc.id), class: 'dropdown-item'
+                = form_tag(goals_path,:method => 'get', class:'form-inline') do 
+                    = text_field_tag :search, nil, {class: 'form-control mr-sm-2', placeholder: "目標を入力"}
+                    = submit_tag '検索', :name => nil, class: 'btn btn-outline-success my-2 my-sm-0'
+                .col-md-1
 = render partial: 'goal'
-= link_to "目標を新規作成", new_goal_path
-= button_to "マイページ", user_path(id: current_user.id), { method: :get, class: "btn btn-primary mr-3" }
-= button_to "ログアウト", destroy_user_session_path, { method: :delete, class: "btn btn-primary mr-3" }

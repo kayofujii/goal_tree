@@ -1,25 +1,24 @@
-table
-    thead
-        tr
-            th 目標
-            th 行動
-            th 価値観
-            th ランク
-            th カテゴリ
-            th
-            th
-
-    tbody
-        - @goals.each do |goal|
-            tr
-                td = goal.goal_content
-                - if goal.goal_actions.present?
-                    td = goal.goal_actions.first.action_name
-                td = goal.identity_content
-                td = goal.rank
-                td = goal.goal_category.name
-                td  
-                    = link_to '詳細', goal_path(goal), class: 'btn btn-light mr-3'
-                td 
-                    - if goal.user_id == current_user.id
-                        = link_to_if goal.user_id == current_user.id, '行動を追加', new_goal_action_record_path(goal), class: 'btn btn-light mr-3'
+.container
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            - @goals.each do |goal|
+                .card.my-3
+                    .card-body
+                        h6.card-text
+                            = image_tag goal.user.icon.url, class:'image m-0', width: '50px'
+                            = link_to "#{goal.user.name}", user_path(goal.user.id), class: 'm-2'
+                        h5.card-title
+                            = goal.goal_content
+                        h6.card-text
+                            i.fa.fa-star
+                            = "達成Lv.#{goal.rank}"
+                            = link_to "#{goal.goal_category.name}", goals_path(goal_category_id:goal.goal_category.id),
+                                class: 'btn btn-outline-primary btn-sm mx-3'
+                        hr
+                        h6.card-text
+                            = link_to '詳細', goal_path(goal), class: 'card-link mr-3'
+                            - if goal.user_id == current_user.id
+                                = link_to_if goal.user_id == current_user.id, '行動を追加', new_goal_action_record_path(goal),
+                                    class: 'card-link mr-3'
+        .col-md-1

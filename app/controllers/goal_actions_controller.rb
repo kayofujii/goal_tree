@@ -35,7 +35,7 @@ class GoalActionsController < ApplicationController
         @goal = @goal_action.goal
         @goal_action.assign_attributes goal_action_params
         if @goal_action.save
-            redirect_to goal_goal_actions_path(@goal)
+            redirect_back(fallback_location: root_path)
         else
             redirect_back(fallback_location: root_path)
         end

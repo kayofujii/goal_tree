@@ -16,7 +16,6 @@ class GoalsController < ApplicationController
 
     def new
         @goal = Goal.new
-        @goal_categories = GoalCategory.all
         @goal.goal_actions.build
     end
 

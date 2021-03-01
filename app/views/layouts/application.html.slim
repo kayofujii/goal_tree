@@ -1,16 +1,32 @@
 html
   head
-    title MyApp
+    title GoalBaddy
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
 
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-
   body
-    .app-title.navbar.navbar-expand-md.navbar-light.bg-light
-      .navbar-btand Goal
+    header.nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-4
+      .container
+          a.navbar-brand href="#" GoalBuddy
+          button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
+              span.navbar-toggler-icon
+          #navbarSupportedContent.collapse.navbar-collapse
+              ul.navbar-nav.mr-auto
+                  li.navi-item
+                      = link_to root_path(id: current_user.id), { method: :get, class: "nav-link "} do
+                          i.fa.fa-plus 行動を追加
+                      end
+                  li.navi-item
+                      = link_to goals_path, { method: :get, class: "nav-link "} do
+                          i.fa.fa-flag-checkered みんなの目標
+                      end
+                  li.navi-item
+                      = link_to user_path(id: current_user.id), { method: :get, class: "nav-link "} do
+                          i.fa.fa-user マイページ
+                      end
     .container
       - flash.each do |key, value|
         = content_tag :div, value, class: "alert alert-#{key}"
