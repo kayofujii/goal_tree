@@ -1,22 +1,34 @@
-
-h1 目標名:#{@goal.goal_content}
-
-table
-    thead
-        tr
-            th 画像
-            th コメント
-            th 
-            th
-
-    tbody
-        - @action_records.each do |action_record|
-            tr
-                td = image_tag action_record.action_image_url, width: '50px' if action_record.action_image.present?
-                td = action_record.action_comment
-                - if @goal.user_id == current_user.id
-                    td
-                        = link_to_if action_record.user_id == current_user.id,'編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3'
-                    td
-                        = link_to_if action_record.user_id == current_user.id,'削除', method: :delete, class: 'btn btn-primary mr-3'
-= link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'
+.container
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            h1 #{@goal.goal_content}
+            = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'
+            - if @goal.user_id == current_user.id
+                = link_to '行動記録を追加', new_goal_action_record_path(@goal),
+                    class: 'btn btn-light mr-3'
+            - @action_records.each do |action_record|
+                .card.my-3
+                    .row
+                        .col-sm-2
+                            - if action_record.action_image_url.present?
+                                = image_tag action_record.action_image_url, class:'m-3', width: '80px'
+                            - else
+                                = image_tag 'hata.svg', class:' m-3', width: '100px'
+                        .col-sm-10 
+                            .card-body
+                                h5.card-title
+                                    = action_record.goal_action.action_name
+                                p.card-text
+                                    = action_record.action_comment
+                                p.card-text
+                                    = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
+                                            - if @goal.user_id == current_user.id
+                                p.card-text.text-right
+                                    = link_to_if @goal.user_id == current_user.id, '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3 text-right'
+                                    = link_to_if @goal.user_id == current_user.id,'削除', action_record_path(action_record), method: :delete, remote: true,class: 'btn btn-primary mr-3'
+            = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'
+            - if @goal.user_id == current_user.id
+                = link_to '行動記録を追加', new_goal_action_record_path(@goal),
+                    class: 'btn btn-light mr-3'
+        .col-md-1

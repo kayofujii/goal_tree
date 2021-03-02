@@ -20,10 +20,9 @@ class ActionRecordsController < ApplicationController
         @action_record.goal_id = params[:goal_id]
         @goal = Goal.find(params[:goal_id])
         if @action_record.save
-            redirect_to root_path,
-            success: "保存しました"
+            redirect_to goal_action_records_path(@goal)
         else
-            render :new
+            redirect_back(fallback_location: root_path)
         end
         update_goal_rank
     end
