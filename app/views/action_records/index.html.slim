@@ -27,8 +27,8 @@
                                 p.card-text.text-right
                                     = link_to_if @goal.user_id == current_user.id, '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3 text-right'
                                     = link_to_if @goal.user_id == current_user.id,'削除', action_record_path(action_record), method: :delete, remote: true,class: 'btn btn-primary mr-3'
-            = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'
+            = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light m-3'
             - if @goal.user_id == current_user.id
                 = link_to '行動記録を追加', new_goal_action_record_path(@goal),
-                    class: 'btn btn-light mr-3'
+                    class: 'btn btn-light m-3'
         .col-md-1

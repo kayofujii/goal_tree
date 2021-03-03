@@ -23,6 +23,7 @@ class GoalsController < ApplicationController
         @goal = current_user.goals.create(goal_params)
         if @goal.save
             redirect_to action: :index
+            flash[:success] = "保存しました"
         else
             render :new
         end
@@ -44,6 +45,7 @@ class GoalsController < ApplicationController
         @goal.assign_attributes goal_params
         if @goal.save && @goal.user_id == current_user.id
             redirect_to action: :index
+            flash[:success] = "保存しました"
         else
             render :edit
         end
@@ -53,7 +55,8 @@ class GoalsController < ApplicationController
         @goal = Goal.find(params[:id])
         if @goal.user_id == current_user.id
             @goal.destroy
-            redirect_to goals_url, notice: "目標を削除しました"
+            redirect_to goals_url
+            flash[:notice] = "目標を削除しました"
         end
     end
 

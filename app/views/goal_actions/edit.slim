@@ -1,11 +1,17 @@
-- if @goal_action.errors.present?
-    ul#error_explanation
-        - @goal_action.errors.full_messages.each do |message|
-            li = message
-
-= form_with model: @goal_action, local: true do |f|
-    .form-group
-        = f.label :action_name
-        = f.text_field :action_name, class: 'form-control'
-    = f.submit "submit", class:"btn btn-primary"
-= link_to "一覧へ", root_path
+.container
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            h1 行動追加
+            - if @goal_action.errors.present?
+                ul#error_explanation
+                    - @goal_action.errors.full_messages.each do |message|
+                        li = message
+            = form_with model: @goal_action, local: true do |f|
+                .form-group
+                    = f.label :行動名
+                    = f.text_field :action_name, class: 'form-control'
+                = f.submit "登録", class:"btn btn-primary btn-block"
+                .text-left
+                    = link_to '行動一覧', goal_goal_actions_path(@goal), class: 'btn btn-light btn-block my-3'
+        .col-md-1

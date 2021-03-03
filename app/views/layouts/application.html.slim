@@ -28,6 +28,12 @@ html
                           i.fa.fa-user マイページ
                       end
     .container
-      - flash.each do |key, value|
-        = content_tag :div, value, class: "alert alert-#{key}"
+      .row
+        .col-md-1
+        .col-md-10.col-sm-12
+          - flash.each do |key, value|
+            = content_tag(:div, class: "alert alert-#{key}") do
+              = content_tag(:button, '×', class: 'close', data: {dismiss: 'alert'})
+              = content_tag(:div, value)
+        .col-md-1
       = yield

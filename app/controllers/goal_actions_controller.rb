@@ -7,8 +7,8 @@ class GoalActionsController < ApplicationController
     end
 
     def new
-        @goal = Goal.find(params[:goal_id])
         @goal_action = GoalAction.new
+        @goal = Goal.find(params[:goal_id])
         @user = @goal.user
         redirect_to(root_path) unless current_user?(@user)
     end
@@ -20,6 +20,7 @@ class GoalActionsController < ApplicationController
 
         if @goal_action.save
             redirect_to action: :index
+            flash[:success] = "保存しました"
         else
             render :new
         end
@@ -35,7 +36,8 @@ class GoalActionsController < ApplicationController
         @goal = @goal_action.goal
         @goal_action.assign_attributes goal_action_params
         if @goal_action.save
-            redirect_back(fallback_location: root_path)
+            redirect_to goal_goal_actions_path(@goal)
+            flash[:success] = "保存しました"
         else
             redirect_back(fallback_location: root_path)
         end
@@ -46,7 +48,8 @@ class GoalActionsController < ApplicationController
         @goal = @goal_action.goal
         if @goal_action.user_id == current_user.id
             @goal_action.destroy
-            redirect_to goal_goal_actions_path(@goal), notice: "目標を削除しました"
+            redirect_to goal_goal_actions_path(@goal)
+            flash[:notice] = "目標を削除しました"
         end
     end
 
