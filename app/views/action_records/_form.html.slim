@@ -5,12 +5,12 @@
 
 = form_for [@goal, @action_record] do |f|
     .form-group
-        = f.label :goal_action
-        = f.collection_select(:goal_action_id, @goal_actions, :id, :action_name)
+        = f.label :行動を選択
+        = f.collection_select(:goal_action_id, @goal_actions, :id, :action_name, {prompt: false}, {class: "form-control"})
     .form-group
-        = f.label :action_image
-        = f.file_field :action_image
+        = f.label :画像を追加
+        = f.file_field :action_image, class: 'form-control-file'
     .form-group
-        = f.label :action_comment
+        = f.label :コメントを入力
         = f.text_field :action_comment, class: 'form-control'
-    = f.submit "登録", class:"btn btn-primary"
+    = f.submit "登録", class:"btn btn-primary btn-block"

@@ -19,6 +19,6 @@
                         h6.card-text
                             = link_to '詳細', goal_path(goal), class: 'card-link mr-3'
                             - if goal.user_id == current_user.id
-                                = link_to_if goal.user_id == current_user.id, '行動を追加', new_goal_action_record_path(goal),
+                                = link_to_if goal.user_id == current_user.id, '行動記録を追加', new_goal_action_record_path(goal),
                                     class: 'card-link mr-3'
         .col-md-1
