@@ -1,53 +1,44 @@
-h2
-  | Edit 
-  = resource_name.to_s.humanize
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "users/shared/error_messages", resource: resource
-  .field
-    = f.label :icon
-    br
-    = f.file_field :icon
-    = f.hidden_field :icon_cache
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :name
-    br
-    = f.text_field :name, autofocus: true, autocomplete: "name"
-  .field
-    = f.label :description
-    br
-    = f.text_field :description, autofocus: true, autocomplete: "description"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: 
-      = resource.unconfirmed_email
-  .field
-    = f.label :password
-    i
-      | (パスワード変更しない場合は入力しないで大丈夫です)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      br
-      em
-        = @minimum_password_length
-        |  文字以上
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    i
-      | (パスワードを変更する場合は現在のパスワードを入力する必要があります)
-    br
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "変更"
-h3
-  | 退会する
-= button_to "退会する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-= link_to "戻る", :back
+.container
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            h1 プロフィール編集
+            = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+                = render "users/shared/error_messages", resource: resource
+                .form-group
+                    = f.label :画像
+                    = f.file_field :icon, class: 'form-control-file'
+                .form-group
+                    = f.label :email
+                    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+                .form-group
+                    = f.label :name
+                    = f.text_field :name, class: 'form-control'
+                .form-group
+                    = f.label :description
+                    = f.text_field :description, class: 'form-control'
+                .form-group
+                    = f.label :password
+                    i
+                      | (パスワード変更しない場合は入力しないで大丈夫です)
+                    br
+                    - if @minimum_password_length
+                      em
+                        = @minimum_password_length
+                        |  文字以上
+                    = f.password_field :password, autocomplete: "new-password", class: 'form-control'
+                .form-group
+                  = f.label :password_confirmation
+                  = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
+                .form-group
+                  = f.label :current_password
+                  i
+                    | (パスワードを変更する場合は現在のパスワードを入力する必要があります)
+                  br
+                  = f.password_field :current_password, autocomplete: "current-password", class: 'form-control'
+                .actions
+                  = f.submit "プロフィールを変更", class:"btn btn-primary btn-block my-3"
+            h3 退会する
+            = button_to "退会する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-block my-3'
+            = link_to "戻る", :back,class: 'btn btn-light btn-block my-3'
+        .col-md-1
