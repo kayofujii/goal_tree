@@ -8,7 +8,7 @@
                 = link_to '行動記録を追加', new_goal_action_record_path(@goal),
                     class: 'btn btn-light mr-3'
             - @action_records.each do |action_record|
-                .card.my-3
+                .card.bg-light.my-3
                     .row
                         .col-sm-2
                             - if action_record.action_image_url.present?

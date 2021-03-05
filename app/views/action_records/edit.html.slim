@@ -19,4 +19,4 @@
                     = f.label :コメントを入力
                     = f.text_field :action_comment, class: 'form-control'
                 = f.submit "登録", class:"btn btn-primary btn-block"
-                = link_to '行動記録一覧', goal_action_records_path(@goal), class: 'btn btn-light btn-block my-3'
+                = link_to "戻る", :back,class: 'btn btn-light btn-block my-3'

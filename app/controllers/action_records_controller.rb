@@ -85,6 +85,12 @@ class ActionRecordsController < ApplicationController
         when 34
             @goal.update(rank:8)
             flash[:info] = "達成ランクが8になりました"
+        when 55
+            @goal.update(rank:9)
+            flash[:info] = "達成ランクが9になりました"
+        when 89
+            @goal.update(rank:10)
+            flash[:info] = "達成ランクが10になりました!目標達成です◎"
         else
             nil
         end
