@@ -4,7 +4,9 @@ ja:
       user:
         current_password: "現在のパスワード"
         email: "メールアドレス"
-        name: "名前"
+        display_name: "名前"
+        name: "ユーザーネーム"
+        login: "ユーザー名もしくはメールアドレス"
         description: "紹介文"
         password: "パスワード"
         password_confirmation: "確認用パスワード"

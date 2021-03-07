@@ -14,21 +14,24 @@
                 .form-group
                     = f.label :name
                     = f.text_field :name, class: 'form-control'
+                    .small.form-text.text-muted 英数字アンダースコアで5文字以上15文字以内
+                .form-group
+                    = f.label :display_name
+                    = f.text_field :display_name, class: 'form-control'
                 .form-group
                     = f.label :description
                     = f.text_field :description, class: 'form-control'
                 .form-group
                     = f.label :password
-                    br
-                    - if @minimum_password_length
-                      em
-                        = @minimum_password_length
-                        |  文字以上
                     = f.password_field :password, autocomplete: "new-password", class: 'form-control'
+                    .small.form-text.text-muted
+                        - if @minimum_password_length
+                            = @minimum_password_length
+                            |  文字以上
                 .form-group
-                  = f.label :password_confirmation
-                  = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
+                    = f.label :password_confirmation
+                    = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
                 .actions
-                  = f.submit t('devise.registrations.new.sign_up'), class:"btn btn-primary btn-block my-3"
+                    = f.submit t('devise.registrations.new.sign_up'), class:"btn btn-primary btn-block my-3"
             = render "users/shared/links"
         .col-md-1
