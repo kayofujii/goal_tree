@@ -3,7 +3,7 @@ class ActionRecordsController < ApplicationController
 
     def index
         @goal = Goal.find(params[:goal_id])
-        @action_records = @goal.action_records.all
+        @action_records = @goal.action_records.order(id: "DESC")
     end
 
     def new

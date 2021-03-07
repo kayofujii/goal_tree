@@ -15,6 +15,7 @@ class GoalActionsController < ApplicationController
 
     def create
         @goal_action = GoalAction.new(goal_action_params)
+        @goal = Goal.find(params[:goal_id])
         @goal_action.user_id = current_user.id
         @goal_action.goal_id = params[:goal_id]
 

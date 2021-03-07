@@ -12,22 +12,27 @@
             - @goals.each do |goal|
                 .card.bg-light.my-3
                     .card-body
-                        h6.card-text
-                            - if goal.user.icon.url.present?
-                                = image_tag goal.user.icon.url, class:'image m-3', width: '80px'
-                            - else 
-                                = image_tag 'azarasi.svg', class:'image m-3', width: '80px'
-                            = link_to "#{goal.user.name}", user_path(goal.user.id), class: 'm-2'
-                        h5.card-title
-                            = goal.goal_content
-                        h6.card-text
+                        .row
+                            .col-5.col-md-2
+                                .card-text
+                                    - if goal.user.icon.url.present?
+                                        = image_tag goal.user.icon.url, class:'image', width: '40px'
+                                    - else 
+                                        = image_tag 'azarasi.svg', class:'image', width: '40px'
+                                    br
+                                    p = link_to "#{goal.user.display_name}", user_path(goal.user.id), class: 'my-1'
+                            .col-7.col-md-8
+                                h5.card-title
+                                    br
+                                    = goal.goal_content
+                        p.card-text
                             i.fa.fa-star
                             = "達成Lv.#{goal.rank}"
                             .progress 
                                 .progress-bar.progress-bar-striped aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" style="width: #{goal.rank * 10}%"
                         h6.card-text
                             = link_to "#{goal.goal_category.name}", goals_path(goal_category_id:goal.goal_category.id),
-                                class: 'btn btn-outline-primary btn-sm mr-2'
+                                class: 'btn btn-outline-primary btn-sm mr-1'
                             - if goal.user == current_user && goal.action_records.blank?
                                 .balloon1
                                     p 行動記録をつけてみよう

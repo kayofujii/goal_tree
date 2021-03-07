@@ -5,12 +5,13 @@ class GoalsController < ApplicationController
     def index
         @goal_categories = GoalCategory.all
         if params[:search].present?
-            @goals = Goal.where('goal_content LIKE ?', "%#{params[:search]}%")
+            @goals = Goal.where('goal_content LIKE ?', "%#{params[:search]}%").order(rank: "DESC")
         elsif params[:goal_category_id].present?
             @goal_category = GoalCategory.find(params[:goal_category_id])
-            @goals = @goal_category.goals.order(created_at: :desc).all
+            @goals = @goal_category.goals.order(rank: "DESC")
         else
-            @goals = Goal.all
+            #rank順に並べる
+            @goals = Goal.order(rank: "DESC")
         end
     end
 
@@ -61,14 +62,15 @@ class GoalsController < ApplicationController
     end
 
     def user
-        @goals = Goal.where(user_id: current_user.id)
+        #目標が最新のもの順に並べる
+        @goals = Goal.where(user_id: current_user.id).order(id: "DESC")
     end
 
     private
     def goal_params
         params.require(:goal).permit(
             :goal_content,:identity_content,:rank,:goal_category_id,
-            goal_actions_attributes: [:action_name, :user_id]
+            goal_actions_attributes: [:id, :action_name, :user_id]
         )
     end
 

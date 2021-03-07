@@ -23,10 +23,13 @@
                                     = action_record.action_comment
                                 p.card-text
                                     = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
-                                            - if @goal.user_id == current_user.id
+                                    = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ action_record.goal.goal_content }の行動を記録しました&hashtags=今日の積み上げ", class: 'btn btn-default' do
+                                        i.fa.fa-twitter style='color: #3399FF;'
+                                        |  Twitterでシェア
                                 p.card-text.text-right
-                                    = link_to_if @goal.user_id == current_user.id, '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3 text-right'
-                                    = link_to_if @goal.user_id == current_user.id,'削除', action_record_path(action_record), method: :delete, remote: true,class: 'btn btn-primary mr-3'
+                                    - if @goal.user_id == current_user.id
+                                        = link_to_if @goal.user_id == current_user.id, '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3 text-right'
+                                        = link_to_if @goal.user_id == current_user.id,'削除', action_record_path(action_record), method: :delete, remote: true,class: 'btn btn-primary mr-3'
             = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light m-3'
             - if @goal.user_id == current_user.id
                 = link_to '行動記録を追加', new_goal_action_record_path(@goal),

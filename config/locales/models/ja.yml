@@ -10,3 +10,5 @@ ja:
         goal_content: 目標
         identity_content: 価値観
         rank: ランク
+      goal_actions:
+        action_name: 行動

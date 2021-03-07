@@ -10,7 +10,7 @@ html
   body
     header.nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-4
       .container
-          a.navbar-brand href="#" GoalBuddy
+          = link_to "GoalBuddy", goals_path, { class: "navbar-brand"}
           button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
               span.navbar-toggler-icon
           #navbarSupportedContent.collapse.navbar-collapse
@@ -37,5 +37,10 @@ html
             = content_tag(:div, class: "alert alert-#{key}") do
               = content_tag(:button, '×', class: 'close', data: {dismiss: 'alert'})
               = content_tag(:div, value)
+              - if key == "info"
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=今日の積み上げ", class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
         .col-md-1
       = yield
