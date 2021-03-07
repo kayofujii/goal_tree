@@ -54,7 +54,7 @@ class ActionRecordsController < ApplicationController
             @action_record.destroy
             update_goal_rank
             redirect_to goal_action_records_path(@goal)
-            flash[:notice] = "削除しました"
+            flash[:warning] = "削除しました"
         end
     end
 

@@ -50,7 +50,7 @@ class GoalActionsController < ApplicationController
         if @goal_action.user_id == current_user.id
             @goal_action.destroy
             redirect_to goal_goal_actions_path(@goal)
-            flash[:notice] = "目標を削除しました"
+            flash[:warning] = "目標を削除しました"
         end
     end
 

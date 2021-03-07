@@ -42,5 +42,20 @@ html
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
+              - if key == "success" && request.url.exclude?("goal_actions") && request.url.exclude?("action_records")
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標を登録しました&hashtags=今日の積み上げ", class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
+              - if key == "success" && request.url.include?("goal_actions")
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=今日の積み上げ", class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
+              - if key == "success" && request.url.include?("action_record")
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を記録しました&hashtags=今日の積み上げ", class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
         .col-md-1
       = yield
