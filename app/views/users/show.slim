@@ -10,7 +10,16 @@
                     - else 
                         = image_tag 'azarasi.svg', class:'image m-3', width: '100px'
                     p @#{@user.name}
-                    h5 = @user.display_name
+                    h5 
+                        = @user.display_name
+                        - if @user.sns_credentials.where(provider:"twitter").present?
+                            = link_to "https://twitter.com/#{@user.sns_credentials.where(provider:"twitter").first.nickname}", class: 'btn btn-default' do
+                                i.fa.fa-twitter style='color: #3399FF;'
+                                |
+                        - if @user.sns_credentials.blank? && current_user == @user
+                            = link_to "/users/auth/twitter", class: 'btn btn-default' do
+                                i.fa.fa-twitter
+                                | twitter連携する
                 .card-body
                     h6.card-text.m-3
                         = @user.description
