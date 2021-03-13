@@ -21,21 +21,19 @@
                     = f.label :description
                     = f.text_field :description, class: 'form-control'
                 .form-group
+                    = f.label :url
+                    = f.text_field :url, class: 'form-control'
+                .form-group
                     = f.label :password
-                    i
-                      | (パスワード変更しない場合は入力しないで大丈夫です)
-                    br
-                    - if @minimum_password_length
-                      em
-                        = @minimum_password_length
-                        |  文字以上
+                    p
+                      | (パスワード変更しない場合は入力しないで大丈夫です) 6文字以上
                     = f.password_field :password, autocomplete: "new-password", class: 'form-control'
                 .form-group
                   = f.label :password_confirmation
                   = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
                 .form-group
                   = f.label :current_password
-                  i
+                  p
                     | (パスワードを変更する場合は現在のパスワードを入力する必要があります)
                   br
                   = f.password_field :current_password, autocomplete: "current-password", class: 'form-control'

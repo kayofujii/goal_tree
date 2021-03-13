@@ -8,6 +8,7 @@ ja:
         name: "ユーザーネーム"
         login: "ユーザー名もしくはメールアドレス"
         description: "紹介文"
+        url: "url"
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"

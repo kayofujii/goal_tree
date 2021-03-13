@@ -3,13 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable,
-        :omniauthable, omniauth_providers: %i[twitter google_oauth2]
+        :omniauthable, omniauth_providers: %i[twitter google_oauth2 facebook]
 
   validates :name, presence: true, uniqueness: true, 
-    format: { with: /\A[a-zA-Z0-9_]{5,15}\z/, message:"は英数字、アンダースコアで5文字以上15文字以内にする必要があります"}
+    format: { with: /\A[a-zA-Z0-9_]{5,50}\z/, message:"は英数字、アンダースコアで5文字以上50文字以内にする必要があります"}
   validates :display_name, presence: true,
     length: { maximum: 50 }
   validates :description, length: { maximum: 200 }
+  validates :password, presence: true, on: :create
 
   has_many :goals, dependent: :destroy
   has_many :goal_actions, dependent: :destroy
@@ -36,13 +37,13 @@ class User < ApplicationRecord
   end
 
   def self.without_sns_data(auth, current_user)
-    user = current_user
+    user = current_user || User.where(email: auth.info.email).first
     # 普通のアカウントを持っているけど、snsのアカウント連携はしていない場合
     if user.present?
       sns = SnsCredential.create(
         uid: auth.uid,
         provider: auth.provider,
-        nickname: auth.info.nickname,
+        nickname: auth.info&.nickname,
         user_id: user.id
       )
     else
@@ -59,7 +60,7 @@ class User < ApplicationRecord
       sns = SnsCredential.create(
         uid: auth.uid,
         provider: auth.provider,
-        nickname: auth.info.nickname,
+        nickname: auth.info&.nickname,
         user_id: user.id
       )
     end
@@ -98,10 +99,11 @@ class User < ApplicationRecord
   end
 
   def self.dummy_name(auth)
-    if User.find_by(name:auth.info.nickname).present?
-      "#{auth.uid}-#{auth.provider}"
-    else
+    #providerがtwitterで、同じユーザーネームが登録されていない場合、Twitterのユーザーネームで登録する
+    if auth.provider == "twitter" && User.find_by(name:auth.info.nickname).blank?
       "#{auth.info.nickname}"
+    else
+      "#{auth.uid}#{auth.provider}"
     end
   end
 end
