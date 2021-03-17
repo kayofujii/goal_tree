@@ -53,7 +53,6 @@ class User < ApplicationRecord
         provider: auth.provider,
         name: User.dummy_name(auth),
         display_name: auth.info.name,
-        remote_icon_url: auth.info.image,
         email: auth.info.email,
         password: Devise.friendly_token[0, 20]
       )
@@ -76,7 +75,6 @@ class User < ApplicationRecord
         provider: auth.provider,
         name: User.dummy_name(auth),
         display_name: auth.info.name,
-        remote_icon_url: auth.info.image,
         email: auth.info.email,
         password: Devise.friendly_token[0, 20]
       )

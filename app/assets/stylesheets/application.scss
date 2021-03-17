@@ -1,6 +1,8 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "font-awesome";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap');
+
 .image {
     border-radius: 200px;
     }
@@ -30,4 +32,14 @@
 .balloon1 p {
     margin: 0;
     padding: 0;
+}
+
+* {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.jumbotron {
+    background-image: image-url('tumiage.PNG');
+    background-size: cover;
+    background-position: center 60%;
 }

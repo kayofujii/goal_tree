@@ -10,7 +10,7 @@
             = form_for [@goal, @goal_action] do |f|
                 .form-group
                     = f.label :行動名
-                    = f.text_field :action_name, class: 'form-control'
+                    = f.text_field :action_name, class: 'form-control', placeholder: "お菓子の代わりにフルーツを食べる"
                 = f.submit "登録", class:"btn btn-primary btn-block"
                 .text-left
                     = link_to "戻る", :back,class: 'btn btn-light btn-block my-3'

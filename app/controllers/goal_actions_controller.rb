@@ -1,4 +1,5 @@
 class GoalActionsController < ApplicationController
+    before_action :authenticate_user!, only:[:new, :edit, :destroy]
     before_action :correct_user, only: [:edit, :update]
 
     def index
@@ -41,6 +42,7 @@ class GoalActionsController < ApplicationController
             flash[:success] = "保存しました"
         else
             redirect_back(fallback_location: root_path)
+            flash[:warning] = "保存できませんでした"
         end
     end
 
@@ -50,7 +52,7 @@ class GoalActionsController < ApplicationController
         if @goal_action.user_id == current_user.id
             @goal_action.destroy
             redirect_to goal_goal_actions_path(@goal)
-            flash[:warning] = "目標を削除しました"
+            flash[:warning] = "行動を削除しました"
         end
     end
 

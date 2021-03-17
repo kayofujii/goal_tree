@@ -40,13 +40,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
     def update_resource(resource, params)
-      # パスワード変更時
-      if params[:password].present? && params[:password_confirmation].present?
-        resource.update_with_password(params)
-      # パスワード変更しないとき
-      else
+      # プロフィールのみ変更時
+      if params[:password].blank? && params[:password_confirmation].blank?
         params.delete(:current_password)
         resource.update_without_password(params)
+      # パスワードも変更時
+      else
+        resource.update_with_password(params)
       end
     end
     # 編集後は編集ページにリダイレクト

@@ -1,4 +1,5 @@
 class ActionRecordsController < ApplicationController
+    before_action :authenticate_user!, only:[:new, :edit, :destroy]
     before_action :correct_user, only: [:edit, :update]
 
     def index

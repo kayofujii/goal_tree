@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only:[:new, :edit, :destroy, :user]
     before_action :correct_user, only: [:edit, :update]
     
     def index
