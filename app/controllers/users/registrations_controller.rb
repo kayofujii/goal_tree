@@ -38,7 +38,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+    def update_resource(resource, params)
+      # プロフィールのみ変更時
+      if params[:password].blank? && params[:password_confirmation].blank?
+        params.delete(:current_password)
+        resource.update_without_password(params)
+      # パスワードも変更時
+      else
+        resource.update_with_password(params)
+      end
+    end
+    # 編集後は編集ページにリダイレクト
+    def after_update_path_for(resource)
+      edit_user_registration_path
+    end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       goal: 目標
+      goal_action: 行動
     attributes:
       goal:
         id: ID
@@ -10,3 +11,7 @@ ja:
         goal_content: 目標
         identity_content: 価値観
         rank: ランク
+      goal_actions:
+        action_name: 行動
+      goal_action:
+        action_name: 行動

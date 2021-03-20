@@ -2,7 +2,9 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 目標詳細
+            h1 #{@goal.goal_content}の目標詳細
+            p.text-right
+                = link_to "by#{@goal.user.display_name}", user_path(@goal.user)
             table.table.table-borderless.table-striped
                 thead
                     tr
@@ -22,11 +24,11 @@
                             tr
                                 th scope="row" カテゴリ
                                 td = @goal.goal_category.name
-            - if @goal.user_id == current_user.id
+            - if @goal.user_id == current_user&.id
                 .text-right
                     = link_to_if @goal.user_id == current_user.id, '編集', edit_goal_path(@goal), class: 'btn btn-primary mr-3 text-right'
                     = link_to_if @goal.user_id == current_user.id,'削除', goal_path(@goal), method: :delete, remote: true,class: 'btn btn-primary mr-3'
             br
             = link_to '行動一覧', goal_goal_actions_path(@goal), class: 'btn btn-light mr-3'
-            = link_to '行動記録一覧', goal_action_records_path(@goal), class: 'btn btn-light mr-3'
+            = link_to '積み上げ記録一覧', goal_action_records_path(@goal), class: 'btn btn-light mr-3'
         .col-md-1

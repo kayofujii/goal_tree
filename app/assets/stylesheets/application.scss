@@ -1,6 +1,45 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "font-awesome";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap');
+
 .image {
     border-radius: 200px;
     }
+
+.balloon1 {
+    position: relative;
+    display: inline-block;
+    padding: 7px 10px;
+    min-width: 120px;
+    max-width: 100%;
+    color: #555;
+    font-size: 16px;
+    background: #e0edff;
+    border-radius: 10px;
+}
+
+.balloon1:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -15px;
+    border: 15px solid transparent;
+    border-top: 15px solid #e0edff;
+}
+
+.balloon1 p {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.jumbotron {
+    background-image: image-url('tumiage.PNG');
+    background-size: cover;
+    background-position: center 60%;
+}

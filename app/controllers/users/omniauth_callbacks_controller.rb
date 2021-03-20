@@ -7,6 +7,37 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should also create an action method in this controller like this:
   # def twitter
   # end
+  # def facebook
+  #   callback_for(:facebook)
+  # end
+  def facebook
+    callback_for(:facebook)
+  end
+  
+
+  # callback for twitter
+  def twitter
+    callback_for(:twitter)
+  end
+
+  # callback for google
+  def google_oauth2
+    callback_for(:google)
+  end
+
+  def callback_for(provider)
+    @omniauth = request.env['omniauth.auth']
+    info = User.find_oauth(@omniauth, current_user)
+    @user = info[:user]
+    if @user.persisted?
+      sign_in_and_redirect @user, event: :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
+    else
+      session["devise.#{provider}_data"] = request.env["omniauth.auth"].except("extra")
+      flash[:danger] = '連携に失敗しました'
+      redirect_to new_user_registration_url
+    end
+  end
 
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
@@ -17,9 +48,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   # GET|POST /users/auth/twitter/callback
-  # def failure
-  #   super
-  # end
+  def failure
+    redirect_to root_path
+  end
 
   # protected
 

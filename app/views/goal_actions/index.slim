@@ -1,19 +1,24 @@
-h1 行動一覧
-
-table
-    thead
-        tr
-            th 行動
-            th 
-            th
-
-    tbody
-        - @goal_actions.each do |goal_action|
-            tr
-                td = goal_action.action_name
-                - if @goal.user_id == current_user.id
-                    td = link_to_if goal_action.user_id == current_user.id,'編集', edit_goal_action_path(goal_action), class: 'btn btn-primary mr-3'
-                    td = link_to_if @goal.user_id == current_user.id,'削除', goal_action_path(goal_action), method: :delete, remote: true, class: 'btn btn-primary mr-3'
-br 
-= link_to '行動を追加', new_goal_goal_action_path, class: 'btn btn-light mr-3'
-= link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light mr-3'
+.container
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            h1 #{@goal.goal_content}の行動一覧
+            table.table.table-borderless.table-striped
+                thead
+                    tr
+                        th 
+                        th
+                    tbody
+                            - @goal_actions.each.with_index(1) do |goal_action, index|
+                                tr
+                                    th scope="row" 行動#{index}
+                                    td 
+                                        = goal_action.action_name
+                                        - if @goal.user_id == current_user&.id
+                                            .text-right
+                                                = link_to '編集', edit_goal_action_path(goal_action), class: 'btn btn-primary mr-3'
+                                                = link_to '削除', goal_action_path(goal_action), method: :delete, remote: true, class: 'btn btn-primary mr-3'
+            = link_to '目標詳細に戻る', goal_path(@goal), class: 'btn btn-light m-3'
+            - if @goal.user_id == current_user&.id
+                = link_to '行動を追加', new_goal_goal_action_path, class: 'btn btn-light m-3'
+        .col-md-1

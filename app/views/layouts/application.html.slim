@@ -1,6 +1,6 @@
 html
   head
-    title GoalBaddy
+    title Tsumiki
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
@@ -8,26 +8,138 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    header.nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-4
+    header.nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container
-          a.navbar-brand href="#" GoalBuddy
+          = link_to root_path, { class: "navbar-brand"} do
+            i.fa.fa-square style='color: #0066FF;'
+            | Tumiki
+          end
           button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
               span.navbar-toggler-icon
           #navbarSupportedContent.collapse.navbar-collapse
               ul.navbar-nav.mr-auto
                   li.navi-item
-                      = link_to root_path(id: current_user.id), { method: :get, class: "nav-link "} do
-                          i.fa.fa-plus 行動を追加
-                      end
+                      - if current_user.present?
+                        = link_to user_goals_path(id: current_user.id), { method: :get, class: "nav-link "} do
+                            i.fa.fa-plus 積み上げ記録を追加
+                        end
                   li.navi-item
                       = link_to goals_path, { method: :get, class: "nav-link "} do
                           i.fa.fa-flag-checkered みんなの目標
                       end
                   li.navi-item
-                      = link_to user_path(id: current_user.id), { method: :get, class: "nav-link "} do
-                          i.fa.fa-user マイページ
-                      end
+                      - if current_user.present?
+                        = link_to user_path(id: current_user.id), { method: :get, class: "nav-link "} do
+                            i.fa.fa-user マイページ
+                        end
+                  li.navi-item
+                      - if current_user.blank?
+                        = link_to new_user_session_path, { method: :get, class: "nav-link "} do
+                            i.fa.fa-user ログイン
+                        end
+    - if current_page?(root_path) && current_user.blank?
+      .jumbotron
+        .container
+          h1 Tsumiki
+          p 積み上げ記録を武器にして、目標達成しよう。
+          = link_to '新規登録', new_user_registration_path, class: 'btn btn-primary my-3'
+          = link_to 'ログイン', new_user_session_path, class: 'btn btn-light m-3'
+      section
+          .container
+            h2.text-center.m-5 サービスの特徴
+            hr.divider.my-4
+            .row
+              .col-lg-4.col-md-6.text-center
+                .mt-5
+                  i.fa.fa-4x.fa-graduation-cap.text-primary.mb-4
+                  h3.h4.mb-2 目標の達成率が上がる
+                  p.text-muted.mb-0 
+                    | 海外大学で実証されている
+                    br
+                    | 目標達成フレームワーク、MACの法則を採用。
+              .col-lg-4.col-md-6.text-center
+                .mt-5
+                  i.fa.fa-4x.fa-arrow-up.text-primary.mb-4
+                  h3.h4.mb-2 モチベーションが上がる
+                  p.text-muted.mb-0 
+                    | 行動するとランクが上がり、
+                    br
+                    | モチベーションの向上に繋がります。
+              .col-lg-4.col-md-6.text-center
+                .mt-5
+                  i.fa.fa-4x.fa-search.text-primary.mb-4
+                  h3.h4.mb-2 みんなの目標が見れる
+                  p.text-muted.mb-0
+                    | 同じような目標を持っている人を探せます。
+                    br
+                    | 自分の目標の参考にできます。
+      section.m-5
+        .container
+          h2.text-center.m-5 サービスの使い方
+          hr.divider.my-4
+          .row
+            .col-lg-4.col-md-6.text-center
+              .mt-5
+                i.fa.fa-4x.fa-edit.text-primary.mb-4
+                h3.h4.mb-2 ①叶えたい目標を入力
+                p.text-muted.mb-0 
+                  | MACの法則のフレームワークに従って
+                  br
+                  | 目標、行動、価値観を入力します。
+            .col-lg-4.col-md-6.text-center
+              .mt-5
+                i.fa.fa-4x.fa-calendar.text-primary.mb-4
+                h3.h4.mb-2 ②行動を記録する
+                p.text-muted.mb-0 
+                  | 登録した行動を行うことができたら、
+                  br
+                  | 行動を記録します。
+            .col-lg-4.col-md-6.text-center
+              .mt-5
+                i.fa.fa-4x.fa-check.text-primary.mb-4
+                h3.h4.mb-2 ③ランクを上げて目標達成
+                p.text-muted.mb-0
+                  | 行動記録を積み上げると、ランクが向上。
+                  br
+                  | ランクが10まで上がったら、目標達成です。
+        .container
+          .row
+            .col-1
+            .col-10 
+              - if current_user.blank?
+                = link_to '新規登録して使ってみる', new_user_registration_path, class: 'btn btn-primary btn-block mt-5'
+                = link_to 'ログイン', new_user_session_path, class: 'btn btn-light btn-block'
+            .col-1
     .container
-      - flash.each do |key, value|
-        = content_tag :div, value, class: "alert alert-#{key}"
+      .row
+        .col-md-1
+        .col-md-10.col-sm-12
+          - flash.each do |key, value|
+            = content_tag(:div, class: "alert alert-#{key}") do
+              = content_tag(:button, '×', class: 'close', data: {dismiss: 'alert'})
+              = content_tag(:div, value)
+              - if key == "info"
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
+              - if key == "success" && request.url.exclude?("goal_actions") && request.url.exclude?("action_records")
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標を登録しました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
+              - if key == "success" && request.url.include?("goal_actions")
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
+              - if key == "success" && request.url.include?("action_record")
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を記録しました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                  i.fa.fa-twitter style='color: #3399FF;'
+                  | Twitterでシェア
+                end
+        .col-md-1
       = yield
+    footer.bg-light.py-5.mt-5
+      .container
+        .small.text-center.text-muted Copyright © 2021 - kayo fuji

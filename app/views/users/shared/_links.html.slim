@@ -1,19 +1,22 @@
 - if controller_name != 'sessions'
-  = link_to t('devise.shared.links.sign_in'), new_session_path(resource_name), class: 'btn btn-light mr-3'
-  br
+  = link_to t('devise.shared.links.sign_in'), new_session_path(resource_name), class: 'btn btn-light btn-block my-3'
 - if devise_mapping.registerable? && controller_name != 'registrations'
-  = link_to t('devise.shared.links.sign_up'), new_registration_path(resource_name), class: 'btn btn-light mr-3'
-  br
+  = link_to t('devise.shared.links.sign_up'), new_registration_path(resource_name), class: 'btn btn-light btn-block my-3'
 - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-  = link_to t('devise.shared.links.forgot_your_password'), new_password_path(resource_name), class: 'btn btn-light mr-3'
-  br
+  = link_to t('devise.shared.links.forgot_your_password'), new_password_path(resource_name), class: 'btn btn-light btn-block my-3'
 - if devise_mapping.confirmable? && controller_name != 'confirmations'
-  = link_to t('devise.shared.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name), class: 'btn btn-light mr-3'
-  br
+  = link_to t('devise.shared.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name), class: 'btn btn-light btn-block my-3'
 - if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
-  = link_to t('devise.shared.didn_t_receive_unlock_instructions'), new_unlock_path(resource_name), class: 'btn btn-light mr-3'
-  br
-- if devise_mapping.omniauthable?
-  - resource_class.omniauth_providers.each do |provider|
-    = link_to "#{OmniAuth::Utils.camelize(provider)}でログイン", omniauth_authorize_path(resource_name, provider), class: 'btn btn-light mr-3'
-    br
+  = link_to t('devise.shared.didn_t_receive_unlock_instructions'), new_unlock_path(resource_name), class: 'btn btn-light btn-block my-3'
+.fb-login-button data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"
+.text-center
+  = link_to user_twitter_omniauth_authorize_path, class: 'btn btn-secondary btn-block my-3' do
+    i.fa.fa-twitter.fa-fw
+    | Twitterでログイン
+  = link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-secondary btn-block my-3' do
+    i.fa.fa-google.fa-fw
+    | Googleでログイン
+  = link_to user_facebook_omniauth_authorize_path, class: 'btn btn-secondary btn-block my-3' do
+    i.fa.fa-facebook.fa-fw
+    | Facebookでログイン
+

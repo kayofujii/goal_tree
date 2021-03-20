@@ -6,17 +6,28 @@
 = form_with model: @goal, local: true do |f|
     .form-group
         = f.label :goal_content
-        = f.text_field :goal_content, class: 'form-control'
+        = f.text_field :goal_content, class: 'form-control', placeholder: "2月までに3kg痩せる"
+        small.form-text.text-muted 抽象的な目標ではなく、数値などを入れた具体的な目標にすることで、達成率を上げることができます。
     .form-group
         = f.fields_for :goal_actions do |af|
             = af.hidden_field :user_id, value: current_user.id
             = af.label :行動
-            = af.text_field :action_name, class: 'form-control'
+            small.text-muted  ※後で違う行動も追加できます!
+            = af.text_field :action_name, class: 'form-control', placeholder: "朝起きたら、HIITを4分やる"
+            small.form-text.text-muted 
+                | 毎日できるような、ハードルが低い行動にすると、続けやすいためおすすめです。
+                br
+                | やる時間なども決めると、行動ができる確率をあげることができます。
     .form-group
         = f.label :identity_content
-        = f.text_field :identity_content, class: 'form-control'
+        = f.text_field :identity_content, class: 'form-control', placeholder: "健康的でいたい"
+        small.form-text.text-muted 
+            | その目標を達成したいと思った自分の価値観を書いてください。
+            br
+            | これを書くことで、その目標が人から言われたことではなく、自分の意志で本当に達成したいと思った目標なのか確認できます。
     .form-group
         = f.label :カテゴリー
         = f.collection_select(:goal_category_id, GoalCategory.all, :id, :name, {prompt: false}, {class: "form-control"})
     .text-center
         = f.submit "登録", class:"btn btn-primary btn-block"
+        = link_to "戻る", :back,class: 'btn btn-light btn-block my-3'

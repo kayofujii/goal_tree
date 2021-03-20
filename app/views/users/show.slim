@@ -1,36 +1,72 @@
-h1 User
-= image_tag @user.icon.url, width: '50px'
-table
-    thead
-        tr
-            th 名前
-            th メール
-            th 説明
-
-tbody
-    td = @user.name
-    td = @user.email
-    td = @user.description
-br
-table
-    thead
-        tr
-            th 目標
-            th 行動
-            th 価値観
-            th ランク
-            th email
-            th
-
-    tbody
-        - @user.goals.each do |ug|
-            tr
-                td = ug.goal_content
-                td = ug.goal_actions.first.action_name
-                td = ug.identity_content
-                td = ug.rank
-                td = ug.user.email
-                td
-                    = link_to '編集', edit_goal_path(ug), class: 'btn btn-primary mr-3'
-                td
-                    = link_to '削除', goal_path(ug), method: :delete, class: 'btn btn-primary mr-3'
+.container
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            h1 マイページ
+            .card.my-3
+                .card-header
+                    .row
+                        .col-4.col-md-2
+                            - if @user.icon.url.present?
+                                = image_tag @user.icon.url, class:'image m-3', width: '100px'
+                            - else 
+                                = image_tag 'azarasi.svg', class:'image m-3', width: '100px'
+                        .col-8.col-md-8.mt-4
+                            h5 = @user.display_name
+                            = @user.name
+                            - if @user.sns_credentials.where(provider:"twitter").present?
+                                = link_to "https://twitter.com/#{@user.sns_credentials.where(provider:"twitter").first.nickname}", target: :_blank, class: 'btn btn-default' do
+                                    i.fa.fa-twitter style='color: #3399FF;'
+                                    |
+                            - if @user.sns_credentials.where(provider:"twitter").blank? && current_user == @user
+                                = link_to "/users/auth/twitter", class: 'btn btn-default' do
+                                    i.fa.fa-twitter
+                                    | 連携する
+                            br
+                            - if @user.url.present?
+                                h6 = link_to "#{@user.url}","#{@user.url}", target: :_blank, class:'text-dark'
+                .card-body
+                    h6.card-text.m-3
+                        = @user.description
+                    h6.card-text
+                        - if @user.id == current_user&.id
+                            = link_to "プロフィール編集", edit_user_registration_path(current_user.id), class: 'btn btn-light m-1'
+                            = link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-danger m-1'
+                            = link_to '目標を登録', new_goal_path, class:'btn btn-primary m-1'
+    .row
+        .col-md-1
+        .col-md-10.col-sm-12
+            - @user.goals.order(rank: "DESC").each do |goal|
+                .card.bg-light.my-3
+                    .card-body
+                        .row
+                            .col-5.col-md-2
+                                .card-text
+                                    - if goal.user.icon.url.present?
+                                        = image_tag goal.user.icon.url, class:'image', width: '60px'
+                                    - else 
+                                        = image_tag 'azarasi.svg', class:'image', width: '60px'
+                                    br
+                                    p = link_to "#{goal.user.display_name}", user_path(goal.user.id), class: 'my-1'
+                            .col-7.col-md-8
+                                h5.card-title
+                                    br
+                                    = goal.goal_content
+                        p.card-text
+                            i.fa.fa-star
+                            = "達成Lv.#{goal.rank}"
+                            .progress 
+                                .progress-bar.progress-bar-striped aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" style="width: #{goal.rank * 10}%"
+                        h6.card-text
+                            = link_to "#{goal.goal_category.name}", goals_path(goal_category_id:goal.goal_category.id),
+                                class: 'btn btn-outline-primary btn-sm mr-1'
+                            - if goal.user == current_user && goal.action_records.blank?
+                                .balloon1
+                                    p 積み上げ記録をつけてみよう
+                        hr
+                        h6.card-text
+                            = link_to '詳細', goal_path(goal), class: 'card-link mr-3'
+                            - if goal.user_id == current_user&.id
+                                = link_to_if goal.user_id == current_user.id, '行動記録を追加', new_goal_action_record_path(goal),
+                                    class: 'card-link mr-3'
+        .col-md-1

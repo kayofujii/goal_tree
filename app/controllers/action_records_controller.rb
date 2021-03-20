@@ -1,9 +1,10 @@
 class ActionRecordsController < ApplicationController
+    before_action :authenticate_user!, only:[:new, :edit, :destroy]
     before_action :correct_user, only: [:edit, :update]
 
     def index
         @goal = Goal.find(params[:goal_id])
-        @action_records = @goal.action_records.all
+        @action_records = @goal.action_records.order(id: "DESC")
     end
 
     def new
@@ -21,6 +22,7 @@ class ActionRecordsController < ApplicationController
         @goal = Goal.find(params[:goal_id])
         if @action_record.save
             redirect_to goal_action_records_path(@goal)
+            flash[:success] = "保存しました"
         else
             redirect_back(fallback_location: root_path)
         end
@@ -29,7 +31,7 @@ class ActionRecordsController < ApplicationController
 
     def edit
         @action_record = ActionRecord.find(params[:id])
-        @goals = @action_record.goal
+        @goal = @action_record.goal
         @goal_actions = current_user.goal_actions
     end
 
@@ -38,8 +40,8 @@ class ActionRecordsController < ApplicationController
         @goal = @action_record.goal
         @action_record.assign_attributes action_record_params
         if @action_record.save && @action_record.user_id == current_user.id
-            redirect_to goal_action_records_path(@goal), 
-            success: "保存しました"
+            redirect_to goal_action_records_path(@goal) 
+            flash[:success] = "保存しました"
         else
             redirect_back(fallback_location: root_path)
         end
@@ -52,7 +54,8 @@ class ActionRecordsController < ApplicationController
         if @action_record.user_id == current_user.id
             @action_record.destroy
             update_goal_rank
-            redirect_to goal_action_records_path(@goal), success: "削除しました"
+            redirect_to goal_action_records_path(@goal)
+            flash[:warning] = "削除しました"
         end
     end
 
@@ -83,6 +86,12 @@ class ActionRecordsController < ApplicationController
         when 34
             @goal.update(rank:8)
             flash[:info] = "達成ランクが8になりました"
+        when 55
+            @goal.update(rank:9)
+            flash[:info] = "達成ランクが9になりました"
+        when 89
+            @goal.update(rank:10)
+            flash[:info] = "達成ランクが10になりました!目標達成です◎"
         else
             nil
         end
