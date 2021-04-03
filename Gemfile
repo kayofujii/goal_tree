@@ -71,5 +71,4 @@ gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 gem 'omniauth', '1.9.1'
 gem 'dotenv-rails'
-
-gem 'rails_12factor', group: :production
+gem 'fog'
