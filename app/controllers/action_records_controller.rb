@@ -97,6 +97,10 @@ class ActionRecordsController < ApplicationController
         end
     end
 
+    def all
+        @action_record = ActionRecord.all
+    end
+
     private
     def action_record_params
         params.require(:action_record).permit(

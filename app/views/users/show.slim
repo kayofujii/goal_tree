@@ -8,9 +8,9 @@
                     .row
                         .col-4.col-md-2
                             - if @user.icon.url.present?
-                                = image_tag @user.icon.url, class:'image m-3', width: '100px'
+                                = image_tag @user.icon.url, class:'image m-2', width: '80px'
                             - else 
-                                = image_tag 'azarasi.svg', class:'image m-3', width: '100px'
+                                = image_tag 'azarasi.svg', class:'image m-2', width: '80px'
                         .col-8.col-md-8.mt-4
                             h5 = @user.display_name
                             = @user.name

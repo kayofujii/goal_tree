@@ -10,20 +10,20 @@
                     = f.file_field :icon, class: 'form-control-file'
                 .form-group
                     = f.label :email
-                    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+                    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "a@a.com"
                 .form-group
                     = f.label :name
-                    = f.text_field :name, class: 'form-control'
-                    .small.form-text.text-muted 英数字アンダースコアで5文字以上50文字以内
+                    = f.text_field :name, class: 'form-control', placeholder: "kayo1025"
+                    .small.form-text.text-muted 5文字以上50文字以内oko(英数字アンダースコアを使用できます。)
                 .form-group
                     = f.label :display_name
-                    = f.text_field :display_name, class: 'form-control'
+                    = f.text_field :display_name, class: 'form-control', placeholder: "かよちん"
                 .form-group
                     = f.label :description
-                    = f.text_field :description, class: 'form-control'
+                    = f.text_field :description, class: 'form-control', placeholder: "東京でエンジニアやっています。技術力を高めたいです。"
                 .form-group
                     = f.label :url
-                    = f.text_field :url, class: 'form-control'
+                    = f.text_field :url, class: 'form-control', placeholder: "http://example.com"
                 .form-group
                     = f.label :password
                     = f.password_field :password, autocomplete: "new-password", class: 'form-control'

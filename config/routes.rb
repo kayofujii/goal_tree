@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :action_records
     resources :goal_actions
     get 'user', on: :collection
+    get 'tumiage', on: :collection
   end
   resources :users
 end

@@ -66,6 +66,10 @@ class GoalsController < ApplicationController
         @goals = Goal.where(user_id: current_user.id).order(id: "DESC")
     end
 
+    def tumiage
+        @action_records = ActionRecord.all.order(id: "DESC")
+    end
+
     private
     def goal_params
         params.require(:goal).permit(

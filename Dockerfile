@@ -5,11 +5,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client yarn vim
 
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
+RUN mkdir /my_app
+WORKDIR /my_app
+COPY Gemfile /my_app/Gemfile
+COPY Gemfile.lock /my_app/Gemfile.lock
 RUN bundle install
-COPY . /myapp
+COPY . /my_app
 
 
 COPY entrypoint.sh /usr/bin/

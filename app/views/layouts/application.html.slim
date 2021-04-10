@@ -24,6 +24,10 @@ html
                             i.fa.fa-plus 積み上げ記録を追加
                         end
                   li.navi-item
+                        = link_to tumiage_goals_path, { method: :get, class: "nav-link "} do
+                            i.fa.fa-arrow-up みんなの積み上げ
+                        end
+                  li.navi-item
                       = link_to goals_path, { method: :get, class: "nav-link "} do
                           i.fa.fa-flag-checkered みんなの目標
                       end
