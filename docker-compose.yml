@@ -5,19 +5,38 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
   web:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
     tty: true
     stdin_open: true
     depends_on:
       - db
-    ports:
-      - "3000:3000"
+    # ports:
+    #   - "3000:3000"
     volumes:
       - .:/my_app
+      # - public-data:/my_app/public
+      # - tmp-data:/my_app/tmp
+      # - log-data:/my_app/log
+  nginx:
+    build:
+      context: containers/nginx
+    volumes:
+      - .:/my_app
+      # - public-data:/my_app/public
+      # - tmp-data:/my_app/tmp
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+volumes:
+  # public-data:
+  # tmp-data:
+  # log-data:
+  postgres_data:
