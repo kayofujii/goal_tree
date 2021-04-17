@@ -21,5 +21,6 @@ module MyApp
     config.time_zone = "Tokyo"
     # config.eager_load_paths << Rails.root.join("extras")
     config.hosts << "tumiki-376546437.us-east-2.elb.amazonaws.com"
+    config.hosts << "www.tumiki.work"
   end
 end

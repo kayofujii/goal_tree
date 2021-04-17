@@ -84,4 +84,5 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.hosts << ".herokuapp.com"
   config.hosts << "tumiki-376546437.us-east-2.elb.amazonaws.com"
+  config.hosts << "www.tumiki.work"
 end
