@@ -4,14 +4,13 @@ html
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
-
+    = favicon_link_tag('favicon.jpg')
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     header.nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container
           = link_to root_path, { class: "navbar-brand"} do
-            i.fa.fa-square style='color: #0066FF;'
             | Tumiki
           end
           button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
@@ -143,6 +142,16 @@ html
                 end
         .col-md-1
       = yield
-    footer.bg-light.py-5.mt-5
+    footer.bg-light.py-3.mt-5
       .container
-        .small.text-center.text-muted Copyright © 2021 - kayo fuji
+        .row
+          .col-1
+          .col-10.text-center
+            = link_to 'お問い合わせ', statics_help_path, class: 'small text-muted m-2'
+            = link_to 'プライバシーポリシー', statics_policy_path, class: 'small text-muted m-2'
+          .col-1
+        .row
+          .col-1
+          .col-10
+            .small.text-center.text-muted Copyright © 2021 - kayo fuji
+          .col-1

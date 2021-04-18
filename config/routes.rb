@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     get 'tumiage', on: :collection
   end
   resources :users
+  get 'statics/help'
+  get 'statics/policy'
 end
