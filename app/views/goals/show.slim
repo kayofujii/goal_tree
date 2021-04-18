@@ -2,7 +2,7 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 #{@goal.goal_content}の目標詳細
+            h4 #{@goal.goal_content}の目標詳細
             p.text-right
                 = link_to "by#{@goal.user.display_name}", user_path(@goal.user)
             table.table.table-borderless.table-striped

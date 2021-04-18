@@ -2,7 +2,7 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 みんなの積み上げ
+            h4 みんなの積み上げ
         .col-md-1
 = render partial: 'goal'
 .container
@@ -13,7 +13,7 @@
                 .card.bg-light.my-3
                     .card-body
                         .row
-                            .col-3.col-md-2
+                            .col-4.col-md-2
                                 .card-text
                                     - if action_record.user.icon.url.present?
                                         = image_tag action_record.user.icon.url, class:'image', width: '60px'
@@ -21,7 +21,7 @@
                                         = image_tag 'azarasi.svg', class:'image', width: '60px'
                                     br
                                     p = link_to "#{action_record.user.display_name}", user_path(action_record.user.id), class: 'my-1'
-                            .col-9.col-md-8
+                            .col-8.col-md-8
                                 h5.card-title
                                     = action_record.goal_action.action_name
                                 p.card-text
