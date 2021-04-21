@@ -4,4 +4,7 @@ class StaticsController < ApplicationController
 
     def help
     end
+
+    def how
+    end
 end

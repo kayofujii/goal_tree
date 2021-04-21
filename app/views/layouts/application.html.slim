@@ -1,5 +1,13 @@
 html
   head
+    /! Global site tag (gtag.js) - Google Analytics
+    script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-173362437-1" 
+    javascript:
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-173362437-1');
     title Tsumiki
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
@@ -19,6 +27,10 @@ html
               span.navbar-toggler-icon
           #navbarSupportedContent.collapse.navbar-collapse
               ul.navbar-nav.mr-auto
+                  li.navi-item
+                      = link_to statics_how_path, { method: :get, class: "nav-link "} do
+                          i.fa.fa-question 使い方
+                      end
                   li.navi-item
                       - if current_user.present?
                         = link_to user_goals_path(id: current_user.id), { method: :get, class: "nav-link "} do
@@ -143,6 +155,7 @@ html
                   | Twitterでシェア
                 end
         .col-md-1
+      br
       = yield
     footer.bg-light.py-3.mt-5
       .container

@@ -16,7 +16,10 @@
                     = f.label :画像を追加
                     = f.file_field :action_image, class: 'form-control-file'
                 .form-group
+                    = f.label :URLを入力
+                    = f.text_field :action_url, class: 'form-control'
+                .form-group
                     = f.label :コメントを入力
-                    = f.text_field :action_comment, class: 'form-control'
+                    = f.text_area :action_comment, class: 'form-control'
                 = f.submit "登録", class:"btn btn-primary btn-block"
                 = link_to "戻る", :back,class: 'btn btn-light btn-block my-3'

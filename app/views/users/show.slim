@@ -24,7 +24,7 @@
                                     | 連携する
                             br
                             - if @user.url.present?
-                                h6 = link_to "#{@user.url}","#{@user.url}", target: :_blank, class:'text-dark'
+                                h6 = link_to "#{@user.url}","#{@user.url}", target: :_blank
                 .card-body
                     h6.card-text.m-3
                         = @user.description

@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :users
   get 'statics/help'
   get 'statics/policy'
+  get 'statics/how'
 end

@@ -25,8 +25,10 @@
                                 h5.card-title
                                     = action_record.goal_action.action_name
                                 p.card-text
-                                    = action_record.action_comment
+                                    = simple_format(action_record.action_comment)
                                 p.card-text
+                                    = link_to "#{action_record.action_url}","#{action_record.action_url}", target: :_blank
+                                small.card-text
                                     = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
                         p.card-text
                             i.fa.fa-star
@@ -37,4 +39,8 @@
                             = link_to "#{action_record.goal.goal_category.name}", goals_path(goal_category_id:action_record.goal.goal_category.id),
                                 class: 'btn btn-outline-primary btn-sm mr-1'
                             = link_to '目標詳細', goal_path(action_record.goal), class: 'card-link mr-3'
+                        p.card-text.text-right
+                            - if action_record.user_id == current_user&.id
+                                = link_to_if action_record.user_id == current_user.id, '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3 text-right'
+                                = link_to_if action_record.user_id == current_user.id,'削除', action_record_path(action_record), method: :delete, remote: true,class: 'btn btn-primary mr-3'
         .col-md-1

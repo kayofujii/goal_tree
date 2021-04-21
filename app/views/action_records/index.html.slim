@@ -16,8 +16,10 @@
                                 h5.card-title
                                     = action_record.goal_action.action_name
                                 p.card-text
-                                    = action_record.action_comment
+                                    = simple_format(action_record.action_comment)
                                 p.card-text
+                                    = link_to "#{action_record.action_url}","#{action_record.action_url}", target: :_blank
+                                small.card-text
                                     = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
                                     - if @goal.user_id == current_user&.id
                                         = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ action_record.goal.goal_content }の行動を記録しました&hashtags=今日の積み上げ", class: 'btn btn-default' do
