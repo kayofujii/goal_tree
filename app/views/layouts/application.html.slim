@@ -20,21 +20,20 @@ html
   body
     header.nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container
-          = link_to root_path, { class: "navbar-brand"} do
+          = link_to user_goals_path, { class: "navbar-brand"} do
             | Tumiki
+          end
+          = link_to statics_how_path, { class: "navbar-brand mr-auto"} do
+              i.fa.fa-question-circle
           end
           button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button" 
               span.navbar-toggler-icon
           #navbarSupportedContent.collapse.navbar-collapse
               ul.navbar-nav.mr-auto
                   li.navi-item
-                      = link_to statics_how_path, { method: :get, class: "nav-link "} do
-                          i.fa.fa-question 使い方
-                      end
-                  li.navi-item
                       - if current_user.present?
                         = link_to user_goals_path(id: current_user.id), { method: :get, class: "nav-link "} do
-                            i.fa.fa-plus 積み上げ記録を追加
+                            i.fa.fa-plus 積み上げる
                         end
                   li.navi-item
                         = link_to tumiage_goals_path, { method: :get, class: "nav-link "} do
@@ -57,8 +56,11 @@ html
     - if current_page?(root_path) && current_user.blank?
       .jumbotron
         .container
-          h1 Tsumiki
-          p 積み上げ記録を武器にして、目標達成しよう。
+          h3 Tumiki
+          p.font-weight-bold
+            | 積み上げ記録をつけるだけ。
+            br
+            | 最速で目標達成できるサービス
           = link_to '新規登録', new_user_registration_path, class: 'btn btn-primary my-3'
           = link_to 'ログイン', new_user_session_path, class: 'btn btn-light m-3'
       section

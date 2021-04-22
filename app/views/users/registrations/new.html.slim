@@ -3,6 +3,19 @@
         .col-md-1
         .col-md-10.col-sm-12
             h1 = t('devise.registrations.new.sign_up')
+            .fb-login-button data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"
+            .text-center
+            = link_to user_twitter_omniauth_authorize_path, class: 'btn btn-secondary btn-block my-3' do
+                i.fa.fa-twitter.fa-fw
+                | Twitterで新規登録
+            = link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-secondary btn-block my-3' do
+                i.fa.fa-google.fa-fw
+                | Googleで新規登録
+            = link_to user_facebook_omniauth_authorize_path, class: 'btn btn-secondary btn-block my-3' do
+                i.fa.fa-facebook.fa-fw
+                | Facebookで新規登録
+            hr
+            h3 メールアドレスで新規登録
             = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
                 = render "users/shared/error_messages", resource: resource
                 .form-group
