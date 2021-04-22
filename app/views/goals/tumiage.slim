@@ -30,7 +30,10 @@
                                     p = link_to "#{action_record.user.display_name}", user_path(action_record.user.id), class: 'my-1'
                             .col-8.col-md-8
                                 h5.card-title
+                                    br
                                     = action_record.goal_action.action_name
+                        .row
+                            .col-10.col-md-10
                                 p.card-text
                                     = simple_format(action_record.action_comment)
                                 p.card-text
