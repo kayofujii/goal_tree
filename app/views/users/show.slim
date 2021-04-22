@@ -2,7 +2,7 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 マイページ
+            h4 マイページ
             .card.my-3
                 .card-header
                     .row
@@ -24,7 +24,7 @@
                                     | 連携する
                             br
                             - if @user.url.present?
-                                h6 = link_to "#{@user.url}","#{@user.url}", target: :_blank, class:'text-dark'
+                                h6 = link_to "#{@user.url}","#{@user.url}", target: :_blank
                 .card-body
                     h6.card-text.m-3
                         = @user.description
@@ -40,7 +40,7 @@
                 .card.bg-light.my-3
                     .card-body
                         .row
-                            .col-5.col-md-2
+                            .col-4.col-md-2
                                 .card-text
                                     - if goal.user.icon.url.present?
                                         = image_tag goal.user.icon.url, class:'image', width: '60px'
@@ -48,7 +48,7 @@
                                         = image_tag 'azarasi.svg', class:'image', width: '60px'
                                     br
                                     p = link_to "#{goal.user.display_name}", user_path(goal.user.id), class: 'my-1'
-                            .col-7.col-md-8
+                            .col-8.col-md-8
                                 h5.card-title
                                     br
                                     = goal.goal_content

@@ -2,13 +2,18 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 積み上げ記録を追加
+            h4 積み上げ記録を追加
         .col-md-1
 = render partial: 'goal'
 .container
     .row
         .col-md-1
         .col-md-10.col-sm-12
+            - if current_user.present? && current_user.action_records.blank?
+                .card.bg-light.mb-3
+                    .card-body 
+                        .card-title 
+                            h5 積み上げ記録をつけてみよう!
             - @goals.each do |goal|
                 .card.bg-light.my-3
                     .card-body

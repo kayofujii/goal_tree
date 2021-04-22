@@ -2,7 +2,7 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 みんなの目標
+            h4 みんなの目標
             ul.navbar-nav
                 li.nav-item.dropdown
                     a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
@@ -25,7 +25,7 @@
                 .card.bg-light.my-3
                     .card-body
                         .row
-                            .col-3.col-md-2
+                            .col-4.col-md-2
                                 .card-text
                                     - if goal.user.icon.url.present?
                                         = image_tag goal.user.icon.url, class:'image', width: '60px'
@@ -33,7 +33,7 @@
                                         = image_tag 'azarasi.svg', class:'image', width: '60px'
                                     br
                                     p = link_to "#{goal.user.display_name}", user_path(goal.user.id), class: 'my-1'
-                            .col-9.col-md-8
+                            .col-8.col-md-8
                                 h5.card-title
                                     br
                                     = goal.goal_content

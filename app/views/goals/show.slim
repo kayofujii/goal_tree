@@ -2,27 +2,28 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 #{@goal.goal_content}の目標詳細
+            h4 #{@goal.goal_content}の目標詳細
             p.text-right
                 = link_to "by#{@goal.user.display_name}", user_path(@goal.user)
-            table.table.table-borderless.table-striped
+            table.table.table-striped.table-bordered
                 thead
-                    tr
-                        th 
-                        th
                     tbody
                             tr
-                                th scope="row" 目標
+                                td.font-weight-bold 目標
+                            tr
                                 td = @goal.goal_content
                             - @goal_actions.each.with_index(1) do |goal_action, index|
                                 tr
-                                    th scope="row" 行動#{index}
+                                    td.font-weight-bold 行動#{index}
+                                tr
                                     td = goal_action.action_name
                             tr
-                                th scope="row" 価値観
+                                td.font-weight-bold 価値観
+                            tr
                                 td = @goal.identity_content
                             tr
-                                th scope="row" カテゴリ
+                                td.font-weight-bold カテゴリ
+                            tr
                                 td = @goal.goal_category.name
             - if @goal.user_id == current_user&.id
                 .text-right

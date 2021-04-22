@@ -104,7 +104,7 @@ class ActionRecordsController < ApplicationController
     private
     def action_record_params
         params.require(:action_record).permit(
-            :action_image, :action_comment, :goal_action_id
+            :action_image, :action_comment, :action_url, :goal_action_id
         )
     end
 

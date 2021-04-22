@@ -2,18 +2,25 @@
     .row
         .col-md-1
         .col-md-10.col-sm-12
-            h1 みんなの積み上げ
+            h4 みんなの積み上げ
         .col-md-1
 = render partial: 'goal'
 .container
     .row
         .col-md-1
         .col-md-10.col-sm-12
+            - if current_user.present? && current_user.action_records.blank?
+                .card.bg-light.mb-3
+                    .card-body 
+                        .card-title 
+                            h5 積み上げ記録をつけてみよう!
+                        .card-text
+                            = link_to '積み上げる', user_goals_path(id: current_user.id), class:'btn btn-primary mt-3'
             - @action_records.each do |action_record|
                 .card.bg-light.my-3
                     .card-body
                         .row
-                            .col-3.col-md-2
+                            .col-4.col-md-2
                                 .card-text
                                     - if action_record.user.icon.url.present?
                                         = image_tag action_record.user.icon.url, class:'image', width: '60px'
@@ -21,12 +28,17 @@
                                         = image_tag 'azarasi.svg', class:'image', width: '60px'
                                     br
                                     p = link_to "#{action_record.user.display_name}", user_path(action_record.user.id), class: 'my-1'
-                            .col-9.col-md-8
+                            .col-8.col-md-8
                                 h5.card-title
+                                    br
                                     = action_record.goal_action.action_name
+                        .row
+                            .col-12
                                 p.card-text
-                                    = action_record.action_comment
+                                    = simple_format(action_record.action_comment)
                                 p.card-text
+                                    = link_to "#{action_record.action_url}","#{action_record.action_url}", target: :_blank
+                                small.card-text
                                     = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
                         p.card-text
                             i.fa.fa-star
@@ -37,4 +49,8 @@
                             = link_to "#{action_record.goal.goal_category.name}", goals_path(goal_category_id:action_record.goal.goal_category.id),
                                 class: 'btn btn-outline-primary btn-sm mr-1'
                             = link_to '目標詳細', goal_path(action_record.goal), class: 'card-link mr-3'
+                        p.card-text.text-right
+                            - if action_record.user_id == current_user&.id
+                                = link_to_if action_record.user_id == current_user.id, '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3 text-right'
+                                = link_to_if action_record.user_id == current_user.id,'削除', action_record_path(action_record), method: :delete, remote: true,class: 'btn btn-primary mr-3'
         .col-md-1
