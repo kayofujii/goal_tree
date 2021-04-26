@@ -10,6 +10,11 @@ html
       gtag('config', 'UA-173362437-1');
     title Tsumiki
     meta name="viewport" content="width=device-width,initial-scale=1"
+    meta content="summary" name="twitter:card" 
+    meta content="@munchkayo1025" name="twitter:site" 
+    meta content="#{full_title(yield(:title))}" name="twitter:title"
+    meta content=("#{content_for?(:description) ? yield(:description) : '目標達成サービス'}") name="twitter:description"
+    meta content="#{asset_url('apple-touch-icon.png')}" name="twitter:image"
     = csrf_meta_tags
     = csp_meta_tag
     = favicon_link_tag('apple-touch-icon.png')
@@ -147,7 +152,7 @@ html
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.include?("action_record")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を記録しました&hashtags=今日の積み上げ&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @action_records.first.action_comment }&hashtags=今日の積み上げ&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
