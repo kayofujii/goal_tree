@@ -14,13 +14,14 @@ head
                             - if action_record.action_image_url.present?
                                 = image_tag action_record.action_image_url, class:'m-3', width: '80px'
                             - else
-                                = image_tag 'hata.svg', class:' m-3', width: '100px'
+                                = image_tag 'record.PNG', class:' m-3', width: '80px'
                         .col-sm-10 
                             .card-body
                                 h5.card-title
                                     = action_record.goal_action.action_name
-                                p.card-text
-                                    = simple_format(action_record.action_comment)
+                                .scroll
+                                    p.card-text
+                                        = simple_format(action_record.action_comment)
                                 p.card-text
                                     = link_to "#{action_record.action_url}","#{action_record.action_url}", target: :_blank
                                 small.card-text

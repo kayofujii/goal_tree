@@ -39,7 +39,7 @@ ul#myTab.nav.nav-tabs role="tablist"
                                             - if goal.user.icon.url.present?
                                                 = image_tag goal.user.icon.url, class:'image', width: '60px'
                                             - else 
-                                                = image_tag 'azarasi.svg', class:'image', width: '60px'
+                                                = image_tag 'human.PNG', class:'image', width: '60px'
                                             br
                                             p = link_to "#{goal.user.display_name}", user_path(goal.user.id), class: 'my-1'
                                     .col-8.col-md-8
@@ -85,24 +85,25 @@ ul#myTab.nav.nav-tabs role="tablist"
                                 .row
                                     .col-4.col-md-2
                                         .card-text
-                                            - if action_record.user.icon.url.present?
-                                                = image_tag action_record.user.icon.url, class:'image', width: '60px'
-                                            - else 
-                                                = image_tag 'azarasi.svg', class:'image', width: '60px'
+                                            - if action_record.action_image_url.present?
+                                                = image_tag action_record.action_image_url, class:'', width: '80px'
+                                            - else
+                                                = image_tag 'record.PNG', class:'', width: '80px'
                                             br
-                                            p = link_to "#{action_record.user.display_name}", user_path(action_record.user.id), class: 'my-1'
                                     .col-8.col-md-8
                                         h5.card-title
                                             br
                                             = action_record.goal_action.action_name
                                 .row
                                     .col-12
-                                        p.card-text
-                                            = simple_format(action_record.action_comment)
+                                        .scroll
+                                            p.card-text
+                                                = simple_format(action_record.action_comment)
                                         p.card-text
                                             = link_to "#{action_record.action_url}","#{action_record.action_url}", target: :_blank
                                         small.card-text
                                             = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
+                                            = link_to "By #{action_record.user.display_name}", user_path(action_record.user.id), class: 'ml-2'
                                 p.card-text
                                     i.fa.fa-star
                                     = "目標達成Lv.#{action_record.goal.rank}"
