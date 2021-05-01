@@ -137,7 +137,7 @@ html
               = content_tag(:button, '×', class: 'close', data: {dismiss: 'alert'})
               = content_tag(:div, value)
               - if key == "info"
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=今日の積み上げ&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
@@ -147,12 +147,12 @@ html
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.include?("goal_actions")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=今日の積み上げ&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.include?("action_record")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @action_records.first.action_comment }&hashtags=今日の積み上げ&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @action_records.first.action_comment }&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
