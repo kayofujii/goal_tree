@@ -77,7 +77,7 @@
                                         = link_to_if goal.user_id == current_user.id, '行動記録を追加', new_goal_action_record_path(goal),
                                             class: 'card-link mr-3'
                 #action_record.tab-pane.fade aria-labelledby="action_record-tab" role="tabpanel"
-                    - @user.action_records.each do |action_record|
+                    - @user.action_records.order(id: "DESC").each do |action_record|
                         .card.bg-light.my-3
                             .row
                                 .col-sm-2
@@ -98,7 +98,7 @@
                                             = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
                                         p.card-text
                                             i.fa.fa-star
-                                            = "目標達成Lv.#{action_record.goal.rank}"
+                                            = "達成Lv.#{action_record.goal.rank}"
                                             .progress 
                                                 .progress-bar.progress-bar-striped aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" style="width: #{action_record.goal.rank * 10}%"
                                         h6.card-text
