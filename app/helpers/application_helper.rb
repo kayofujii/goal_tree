@@ -4,7 +4,7 @@ module ApplicationHelper
     end
 
     def full_title(page_title = '')
-        base_title = 'tsumiki'
+        base_title = 'tumiki'
         if page_title.empty?
             base_title
         else
