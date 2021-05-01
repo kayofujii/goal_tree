@@ -8,15 +8,19 @@ html
       gtag('js', new Date());
 
       gtag('config', 'UA-173362437-1');
-    title Tsumiki
+    title Tumiki
     meta name="viewport" content="width=device-width,initial-scale=1"
+    meta content="summary" name="twitter:card" 
+    meta content="@munchkayo1025" name="twitter:site" 
+    meta content="#{full_title(yield(:title))}" name="twitter:title"
+    meta content=("#{content_for?(:description) ? yield(:description) : '目標達成サービス'}") name="twitter:description"
+    meta content="#{asset_url('apple-touch-icon.png')}" name="twitter:image"
     = csrf_meta_tags
     = csp_meta_tag
     = favicon_link_tag('apple-touch-icon.png')
     = favicon_link_tag('apple-touch-icon.png', type: 'image', rel: 'apple-touch-icon')
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    script async="" data-ad-client="ca-pub-9016715250972118" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
   body
     header.nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container
@@ -36,12 +40,8 @@ html
                             i.fa.fa-plus 積み上げる
                         end
                   li.navi-item
-                        = link_to tumiage_goals_path, { method: :get, class: "nav-link "} do
-                            i.fa.fa-arrow-up みんなの積み上げ
-                        end
-                  li.navi-item
                       = link_to goals_path, { method: :get, class: "nav-link "} do
-                          i.fa.fa-flag-checkered みんなの目標
+                          i.fa.fa-flag-checkered タイムライン
                       end
                   li.navi-item
                       - if current_user.present?
@@ -137,22 +137,22 @@ html
               = content_tag(:button, '×', class: 'close', data: {dismiss: 'alert'})
               = content_tag(:div, value)
               - if key == "info"
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.exclude?("goal_actions") && request.url.exclude?("action_records")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標を登録しました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標を登録しました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.include?("goal_actions")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.include?("action_record")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を記録しました&hashtags=今日の積み上げ", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @action_records.first.action_comment }&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end

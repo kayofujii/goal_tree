@@ -1,3 +1,7 @@
+head
+    = content_for(:title, "積み上げ")
+    = content_for(:description, "目標に向けて積み上げました。")
+    = content_for(:image_url, "<%= asset_url('apple-touch-icon.png') %>")
 .container
     .row
         .col-md-1
@@ -10,19 +14,20 @@
                             - if action_record.action_image_url.present?
                                 = image_tag action_record.action_image_url, class:'m-3', width: '80px'
                             - else
-                                = image_tag 'hata.svg', class:' m-3', width: '100px'
+                                = image_tag 'record.PNG', class:' m-3', width: '80px'
                         .col-sm-10 
                             .card-body
                                 h5.card-title
                                     = action_record.goal_action.action_name
-                                p.card-text
-                                    = simple_format(action_record.action_comment)
+                                .scroll
+                                    p.card-text
+                                        = simple_format(action_record.action_comment)
                                 p.card-text
                                     = link_to "#{action_record.action_url}","#{action_record.action_url}", target: :_blank
                                 small.card-text
                                     = action_record.updated_at.strftime("%Y年%m月%d日 %H時%M分")
                                     - if @goal.user_id == current_user&.id
-                                        = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ action_record.goal.goal_content }の行動を記録しました&hashtags=今日の積み上げ", class: 'btn btn-default' do
+                                        = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ action_record.action_comment }&hashtags=tumiki", class: 'btn btn-default' do
                                             i.fa.fa-twitter style='color: #3399FF;'
                                             |  Twitterでシェア
                                 p.card-text.text-right

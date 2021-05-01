@@ -13,6 +13,7 @@ class GoalsController < ApplicationController
             #rank順に並べる
             @goals = Goal.order(rank: "DESC")
         end
+        @action_records = ActionRecord.all.order(id: "DESC")
     end
 
     def new
@@ -67,6 +68,7 @@ class GoalsController < ApplicationController
     end
 
     def tumiage
+        # TODO バグなければ消す
         @action_records = ActionRecord.all.order(id: "DESC")
     end
 
