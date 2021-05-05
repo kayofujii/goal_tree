@@ -6,7 +6,7 @@ module ApplicationHelper
     def default_meta_tags
         {
             site: 'Tumiki ――挫折しない目標達成を支援するサービス',
-            title: 'Tumiki（つみき）',
+            title: 'Tumiki（ツミキ）',
             reverse: true,
             separator: '|',
             description: '挫折しない目標達成を支援するwebアプリです。使い方は3ステップで簡単。
@@ -20,10 +20,8 @@ module ApplicationHelper
             ],
             og: {
                 site_name: 'Tumiki ――挫折しない目標達成を支援するサービス',
-                title: 'Tumiki（つみき）',
-                description: '挫折しない目標達成を支援するwebアプリです。使い方は3ステップで簡単。
-                    海外大学で実証されている目標達成フレームワークに沿って目標を登録、
-                    目標に向けた行動を記録して、ランクを上げていけば自然と目標達成ができます。', 
+                title: 'Tumiki（ツミキ）',
+                description: '3ステップで挫折しない目標達成を支援するwebアプリです。', 
                 type: 'website',
                 url: request.original_url,
                 image: asset_url('apple-touch-icon.png'),

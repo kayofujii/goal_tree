@@ -8,6 +8,7 @@ html
       gtag('js', new Date());
 
       gtag('config', 'UA-173362437-1');
+    script async="" custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js" 
     = display_meta_tags(default_meta_tags)
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
@@ -49,7 +50,7 @@ html
     - if current_page?(root_path) && current_user.blank?
       .jumbotron
         .container
-          h3 Tumiki
+          h3 Tumiki（ツミキ）
           p.font-weight-bold
             | 積み上げ記録をつけるだけ。
             br
@@ -120,6 +121,9 @@ html
               - if current_user.blank?
                 = link_to '新規登録して使ってみる', new_user_registration_path, class: 'btn btn-primary btn-block mt-5'
                 = link_to 'ログイン', new_user_session_path, class: 'btn btn-light btn-block'
+                br
+                amp-ad data-ad-client="ca-pub-9016715250972118" data-ad-slot="1397969627" data-auto-format="rspv" data-full-width="" height="320" type="adsense" width="100vw" 
+                div overflow="" 
             .col-1
     .container
       .row
