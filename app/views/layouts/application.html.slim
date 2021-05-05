@@ -8,7 +8,6 @@ html
       gtag('js', new Date());
 
       gtag('config', 'UA-173362437-1');
-    script async="" custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js" 
     = display_meta_tags(default_meta_tags)
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
@@ -121,9 +120,6 @@ html
               - if current_user.blank?
                 = link_to '新規登録して使ってみる', new_user_registration_path, class: 'btn btn-primary btn-block mt-5'
                 = link_to 'ログイン', new_user_session_path, class: 'btn btn-light btn-block'
-                br
-                amp-ad data-ad-client="ca-pub-9016715250972118" data-ad-slot="1397969627" data-auto-format="rspv" data-full-width="" height="320" type="adsense" width="100vw" 
-                div overflow="" 
             .col-1
     .container
       .row
@@ -156,9 +152,12 @@ html
         .col-md-1
       br
       = yield
-      br
-      amp-ad data-ad-client="ca-pub-9016715250972118" data-ad-slot="1397969627" data-auto-format="rspv" data-full-width="" height="320" type="adsense" width="100vw" 
-      div overflow="" 
+      div align="center"
+        script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" 
+        /! 横長
+        ins.adsbygoogle data-ad-client="ca-pub-9016715250972118" data-ad-format="auto" data-ad-slot="1397969627" data-full-width-responsive="true" style="display:block" 
+        javascript:
+          (adsbygoogle = window.adsbygoogle || []).push({});
     footer.bg-light.py-3.mt-5
       .container
         .row
