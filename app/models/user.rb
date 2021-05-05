@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :goal_actions, dependent: :destroy
   has_many :action_records, dependent: :destroy
   has_many :sns_credentials, dependent: :destroy
+  has_many :messages
 
   mount_uploader :icon, IconUploader
 

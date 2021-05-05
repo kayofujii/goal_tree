@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_113337) do
+ActiveRecord::Schema.define(version: 2021_05_04_083948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,21 @@ ActiveRecord::Schema.define(version: 2021_04_21_113337) do
     t.bigint "goal_category_id"
     t.index ["goal_category_id"], name: "index_goals_on_goal_category_id"
     t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.index ["room_id"], name: "index_messages_on_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sns_credentials", force: :cascade do |t|
@@ -107,5 +122,7 @@ ActiveRecord::Schema.define(version: 2021_04_21_113337) do
   add_foreign_key "action_records", "users"
   add_foreign_key "goal_actions", "goals"
   add_foreign_key "goal_actions", "users"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "sns_credentials", "users"
 end

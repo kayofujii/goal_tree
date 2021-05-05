@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rooms/show'
   devise_for :users, controllers: { 
     omniauth_callbacks: 'users/omniauth_callbacks', registrations: "users/registrations",
     passwords: "users/passwords"}
@@ -13,4 +14,7 @@ Rails.application.routes.draw do
   get 'statics/help'
   get 'statics/policy'
   get 'statics/how'
+  resources :rooms
+  
+  mount ActionCable.server => '/cable'
 end
