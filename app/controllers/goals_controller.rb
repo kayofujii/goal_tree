@@ -5,15 +5,15 @@ class GoalsController < ApplicationController
     def index
         @goal_categories = GoalCategory.all
         if params[:search].present?
-            @goals = Goal.where('goal_content LIKE ?', "%#{params[:search]}%").order(rank: "DESC")
+            @goals = Goal.where('goal_content LIKE ?', "%#{params[:search]}%").order(rank: "DESC").page(params[:goal_page])
         elsif params[:goal_category_id].present?
             @goal_category = GoalCategory.find(params[:goal_category_id])
-            @goals = @goal_category.goals.order(rank: "DESC")
+            @goals = @goal_category.goals.order(rank: "DESC").page(params[:goal_page])
         else
             #rank順に並べる
-            @goals = Goal.order(rank: "DESC")
+            @goals = Goal.order(rank: "DESC").page(params[:goal_page])
         end
-        @action_records = ActionRecord.all.order(id: "DESC")
+        @action_records = ActionRecord.all.order(id: "DESC").page(params[:action_record_page])
     end
 
     def new
