@@ -53,7 +53,7 @@
                     a#action_record-tab.nav-link aria-controls="action_record" aria-selected="false" data-toggle="tab" href="#action_record" role="tab"  積み上げ
             #myTabContent.tab-content
                 #goal.tab-pane.fade.show.active aria-labelledby="goal-tab" role="tabpanel"
-                    - @user.goals.order(rank: "DESC").each do |goal|
+                    - @goals.each do |goal|
                         .card.bg-light.my-3
                             .card-body
                                 .row
@@ -86,8 +86,9 @@
                                     - if goal.user_id == current_user&.id
                                         = link_to_if goal.user_id == current_user.id, '行動記録を追加', new_goal_action_record_path(goal),
                                             class: 'card-link mr-3'
+                    = paginate @goals, param_name: 'goal_page'
                 #action_record.tab-pane.fade aria-labelledby="action_record-tab" role="tabpanel"
-                    - @user.action_records.order(id: "DESC").each do |action_record|
+                    - @action_records.each do |action_record|
                         .card.bg-light.my-3
                             .row
                                 .col-sm-2
@@ -119,4 +120,5 @@
                                             - if action_record.user_id == current_user&.id
                                                 = link_to '編集', edit_action_record_path(action_record), class: 'btn btn-primary mr-3 text-right'
                                                 = link_to '削除', action_record_path(action_record), method: :delete, remote: true,class: 'btn btn-primary mr-3'
+                    = paginate @action_records, param_name: 'action_record_page'
         .col-md-1
