@@ -18,15 +18,17 @@
                 .card.bg-light.my-3
                     .card-body
                         h5.card-title.ml-2
-                            = goal.goal_content
+                            .text-center
+                                = goal.goal_content
+                                br
+                                = image_tag "tree_#{goal.rank}.PNG", class: 'image m-4', width: '250px'
+                        p.card-text
+                            i.fa.fa-star = "達成Lv.#{goal.rank}"
+                            .progress
+                                    .progress-bar.progress-bar-striped aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" style="width: #{goal.rank * 10}%"
                         - if goal.user_id == current_user&.id
                             = link_to_if goal.user_id == current_user.id, '積み上げる', new_goal_action_record_path(goal),
-                                class: 'btn btn-primary btn-block m-1'
-                        p.card-text
-                            i.fa.fa-star
-                            = "達成Lv.#{goal.rank}"
-                            .progress 
-                                .progress-bar.progress-bar-striped aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" style="width: #{goal.rank * 10}%"
+                                class: 'btn btn-primary btn-block'
                         h6.card-text
-                            = link_to '詳細', goal_path(goal), class: 'card-link mr-3'
+                            = link_to '詳細', goal_path(goal), class: 'btn btn-light btn-block mt-2'
         .col-md-1
