@@ -17,11 +17,11 @@
             - @goals.each do |goal|
                 .card.bg-light.my-3
                     .card-body
-                        h5.card-title.ml-2
+                        h5.card-title
                             .text-center
                                 = goal.goal_content
                                 br
-                                = image_tag "tree_#{goal.rank}.PNG", class: 'image m-4', width: '250px'
+                                = image_tag "tree_#{goal.rank}.PNG", class: 'image m-4', width: '200px'
                         p.card-text
                             i.fa.fa-star = "達成Lv.#{goal.rank}"
                             .progress
