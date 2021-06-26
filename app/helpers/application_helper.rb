@@ -24,11 +24,11 @@ module ApplicationHelper
                 description: '3ステップで挫折しない目標達成を支援するwebアプリです。', 
                 type: 'website',
                 url: request.original_url,
-                image: asset_url('apple-touch-icon.png'),
+                image: asset_url('tumiage_complete.png'),
                 locale: 'ja_JP',
             },
             twitter: {
-                card: 'summary',
+                card: 'summary_large_image',
                 site: '@munchkayo1025',
             }
         }
