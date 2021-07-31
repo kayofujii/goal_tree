@@ -4,7 +4,7 @@ class ActionRecordsController < ApplicationController
 
     def index
         @goal = Goal.find(params[:goal_id])
-        @action_records = @goal.action_records.order(id: "DESC")
+        @action_records = @goal.action_records.order(id: "DESC").page(params[:action_record_page])
     end
 
     def new

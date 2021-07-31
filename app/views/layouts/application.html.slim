@@ -49,7 +49,7 @@ html
     - if current_page?(root_path) && current_user.blank?
       .jumbotron
         .container
-          h3 Tumiki
+          h3 Tumiki（ツミキ）
           p.font-weight-bold
             | 積み上げ記録をつけるだけ。
             br
@@ -152,6 +152,16 @@ html
         .col-md-1
       br
       = yield
+      .row
+        .col-md-1
+        .col-md-10.col-sm-12
+          / div align="center"
+          /   script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" 
+          /   /! 横長
+          /   ins.adsbygoogle data-ad-client="ca-pub-9016715250972118" data-ad-format="auto" data-ad-slot="1397969627" data-full-width-responsive="true" style="display:block" 
+          /   javascript:
+          /     (adsbygoogle = window.adsbygoogle || []).push({});
+        .col-md-1
     footer.bg-light.py-3.mt-5
       .container
         .row
