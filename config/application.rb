@@ -22,6 +22,8 @@ module MyApp
     # config.eager_load_paths << Rails.root.join("extras")
     config.hosts << "tumiki-376546437.us-east-2.elb.amazonaws.com"
     config.hosts << "www.tumiki.work"
+    config.hosts << "tsumiki-app.herokuapp.com"
+    config.hosts << "localhost"
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins "*"

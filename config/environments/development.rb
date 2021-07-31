@@ -85,4 +85,5 @@ Rails.application.configure do
   config.hosts << ".herokuapp.com"
   config.hosts << "tumiki-376546437.us-east-2.elb.amazonaws.com"
   config.hosts << "www.tumiki.work"
+  config.hosts << "tsumiki-app.herokuapp.com"
 end
