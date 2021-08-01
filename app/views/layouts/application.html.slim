@@ -18,7 +18,7 @@ html
     header.nav.navbar.navbar-expand-lg.navbar-light.bg-light
       .container
           = link_to user_goals_path, { class: "navbar-brand"} do
-            | Tumiki
+            | Tsumiki
           end
           = link_to statics_how_path, { class: "navbar-brand mr-auto"} do
               i.fa.fa-question-circle
@@ -49,7 +49,7 @@ html
     - if current_page?(root_path) && current_user.blank?
       .jumbotron
         .container
-          h3 Tumiki（ツミキ）
+          h3 Tsumiki（ツミキ）
           p.font-weight-bold
             | 積み上げ記録をつけるだけ。
             br
@@ -130,22 +130,22 @@ html
               = content_tag(:button, '×', class: 'close', data: {dismiss: 'alert'})
               = content_tag(:div, value)
               - if key == "info"
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @goal.goal_content }の達成ランクが#{ @goal.rank }になりました&hashtags=tsumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.exclude?("goal_actions") && request.url.exclude?("action_records")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標を登録しました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標を登録しました&hashtags=tsumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.include?("goal_actions")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=目標名#{ @goal.goal_content }の行動を登録しました&hashtags=tsumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
               - if key == "success" && request.url.include?("action_record")
-                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @action_records.first.action_comment }&hashtags=tumiki", target: :_blank, class: 'btn btn-default' do
+                = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @action_records.first.action_comment }&hashtags=tsumiki", target: :_blank, class: 'btn btn-default' do
                   i.fa.fa-twitter style='color: #3399FF;'
                   | Twitterでシェア
                 end
