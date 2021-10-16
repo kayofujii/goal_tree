@@ -1,9 +1,9 @@
-require 'carrierwave/storage/abstract'
-require 'carrierwave/storage/file'
-require 'carrierwave/storage/fog'
+# require 'carrierwave/storage/abstract'
+# require 'carrierwave/storage/file'
+# require 'carrierwave/storage/fog'
 
-if Rails.env.production?
-    CarrierWave.configure do |config|
+# if Rails.env.production?
+#     CarrierWave.configure do |config|
         # config.fog_provider = 'fog/aws'
         # config.fog_credentials = {
         #     # Amazon S3用の設定
@@ -13,6 +13,6 @@ if Rails.env.production?
         #     :aws_secret_access_key => ENV['S3_SECRET_KEY']
         # }
         # config.fog_directory     =  ENV['S3_BUCKET']
-        config.cache_storage = :file
-    end
-end
+#         config.cache_storage = :file
+#     end
+# end
