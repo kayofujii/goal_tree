@@ -2,12 +2,15 @@ class IconUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   
-  process resize_to_fill: [100, 100, "Center"]
+  # process resize_to_fill: [100, 100, "Center"]
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
     include Cloudinary::CarrierWave
+    CarrierWave.configure do |config|
+      config.cache_storage = :file
+    end
   else
-    include CarrierWave::MiniMagick
+    storage :file
   end
 
   # Override the directory where uploaded files will be stored.
