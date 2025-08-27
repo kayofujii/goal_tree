@@ -1,25 +1,28 @@
-# README
+tumiki is a web application designed to help you set, track, and achieve your goals without giving up. By incorporating a proven framework and gamification elements, it keeps you motivated on your journey to success.
+![mock_image](./image 257.png)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
 
-Things you may want to cover:
+## ✨ Features
 
-* Ruby version
+- **Goal Achievement Framework:** Uses the MAC framework (Measurable, Actionable, Competent) from an overseas university to increase goal achievement rates.
+- **Motivating Rank-Up System:** Rank increases as you log progress, giving a sense of accomplishment even before reaching the final goal.
+- **Community Inspiration:** View other users' goals and progress for motivation and idea generation.
+- **Simple Goal & Progress Tracking:** Register goals, required actions, and your "why," then log progress with a single click.  
 
-* System dependencies
+---
 
-* Configuration
+## 📸 Screenshots
 
-* Database creation
+| Goal Registration | Progress Tracking | Community Goals |
+|------------------|-----------------|----------------|
+| ![Goal Registration](./image 258.png) | ![Progress Tracking](image 259.png) | ![Community Goals](image 260.png) |
 
-* Database initialization
+---
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# goal_tree
+## 🛠️ Technologies Used
+![Technologies Used](image 262.png)
+- **Backend:** Ruby on Rails  
+- **Frontend:** HTML, CSS (Bootstrap)  
+- **Development Environment:** Docker  
+- **Deployment:** AWS EC2, NGINX
