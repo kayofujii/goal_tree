@@ -21,7 +21,7 @@ tumiki is a web application designed to help you set, track, and achieve your go
 ---
 
 ## 🛠️ Technologies Used
-![Technologies Used](image 262.png)
+![Technologies Used](image262.png)
 - **Backend:** Ruby on Rails  
 - **Frontend:** HTML, CSS (Bootstrap)  
 - **Development Environment:** Docker  
