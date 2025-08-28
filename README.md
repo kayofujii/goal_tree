@@ -1,5 +1,5 @@
 tumiki is a web application designed to help you set, track, and achieve your goals without giving up. By incorporating a proven framework and gamification elements, it keeps you motivated on your journey to success.
-![mock_image](./image257.png)
+![mock_image](./images/image257.png)
 
 ---
 
@@ -16,12 +16,12 @@ tumiki is a web application designed to help you set, track, and achieve your go
 
 | Goal Registration | Progress Tracking | Community Goals |
 |------------------|-----------------|----------------|
-| ![Goal Registration](./image258.png) | ![Progress Tracking](image259.png) | ![Community Goals](image260.png) |
+| ![Goal Registration](./images/image258.png) | ![Progress Tracking](./images/image259.png) | ![Community Goals](./images/image260.png) |
 
 ---
 
 ## 🛠️ Technologies Used
-![Technologies Used](image262.png)
+![Technologies Used](./images/image262.png)
 - **Backend:** Ruby on Rails  
 - **Frontend:** HTML, CSS (Bootstrap)  
 - **Development Environment:** Docker  
